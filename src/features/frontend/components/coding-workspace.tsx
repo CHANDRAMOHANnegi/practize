@@ -15,6 +15,11 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import type { BeforeMount, OnMount } from "@monaco-editor/react";
 import type { FrontendProblem } from "@/types/problem";
+import { createPreviewHtml } from "@/features/frontend/runner/create-preview-html";
+import type {
+  PreviewMessage,
+  TestResult,
+} from "@/features/frontend/runner/types";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
@@ -28,23 +33,6 @@ type CodingWorkspaceProps = {
 type WorkspaceFile = "app" | "css";
 type ProblemPanel = "problem" | "solution" | "discuss" | "history";
 type RunStatus = "idle" | "running" | "passed" | "failed" | "error";
-type TestResult = {
-  name: string;
-  passed: boolean;
-  message?: string;
-};
-
-type PreviewMessage = {
-  source: "interview-studio-preview";
-  runId: number;
-  status: "passed" | "failed" | "error";
-  tests?: TestResult[];
-  error?: string;
-};
-
-function escapeInlineScript(value: string) {
-  return value.replaceAll("</script", "<\\/script");
-}
 
 const handleEditorBeforeMount: BeforeMount = (monaco) => {
   monaco.editor.defineTheme("interview-studio-dark", {
@@ -83,84 +71,13 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   const [runtimeError, setRuntimeError] = useState("");
 
   const previewHtml = useMemo(
-    () => {
-      const runnerSource = `
-        ${appCode}
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-
-        async function runWorkspaceTests() {
-          ${problem.testScript}
-
-          const passed = tests.every((test) => test.passed);
-          parent.postMessage({
-            source: 'interview-studio-preview',
-            runId: window.__RUN_ID__,
-            status: passed ? 'passed' : 'failed',
-            tests
-          }, '*');
-        }
-
-        if (window.__RUN_ID__ > 0) {
-          setTimeout(runWorkspaceTests, 120);
-        }
-      `;
-
-      return `
-      <!doctype html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <style>
-            body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f6f7fb; }
-            #root:empty::before {
-              content: "Preview loading...";
-              min-height: 100vh;
-              display: grid;
-              place-items: center;
-              color: #697386;
-            }
-            ${cssCode}
-          </style>
-        </head>
-        <body>
-          <div id="root"></div>
-          <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-          <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-          <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-          <script>
-            window.__RUN_ID__ = ${runId};
-            window.onerror = function(message) {
-              parent.postMessage({
-                source: 'interview-studio-preview',
-                runId: window.__RUN_ID__,
-                status: 'error',
-                error: String(message)
-              }, '*');
-            };
-          </script>
-          <script>
-            try {
-              const workspaceSource = ${JSON.stringify(escapeInlineScript(runnerSource))};
-              const compiled = Babel.transform(workspaceSource, {
-                presets: [['react', { runtime: 'classic' }]]
-              }).code;
-              new Function(compiled)();
-            } catch (error) {
-              parent.postMessage({
-                source: 'interview-studio-preview',
-                runId: window.__RUN_ID__,
-                status: 'error',
-                error: error instanceof Error ? error.message : String(error)
-              }, '*');
-            }
-          </script>
-        </body>
-      </html>
-    `;
-    },
+    () =>
+      createPreviewHtml({
+        appCode,
+        cssCode,
+        runId,
+        testScript: problem.testScript,
+      }),
     [appCode, cssCode, problem, runId],
   );
 
