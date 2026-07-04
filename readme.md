@@ -14,7 +14,7 @@ We are building one module first:
 - Local preview runtime routes for React, ReactDOM, and Babel; no CDN dependency for the workspace runner
 - Real runnable content for the first three problems: Tag Input, Star Rating, and Accordion
 - Per-problem test scripts, constraints, starter files, and solution notes
-- Local Submit flow that saves attempts and displays them in the History tab
+- Local Submit flow with saved attempts, detailed History, restore, delete, and clear controls
 - Local progress dashboard showing attempted/passed state from saved submissions
 - Structured 102-problem metadata inventory with original generated summaries and requirements
 

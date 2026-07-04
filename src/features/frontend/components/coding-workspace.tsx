@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 import {
+  Award,
+  ChevronDown,
   CheckCircle2,
   Clock,
   Code2,
@@ -10,6 +12,7 @@ import {
   MessageCircle,
   Play,
   RotateCcw,
+  Trash2,
   XCircle,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -21,6 +24,8 @@ import type {
   TestResult,
 } from "@/features/frontend/runner/types";
 import {
+  clearLocalSubmissions,
+  deleteLocalSubmission,
   loadLocalSubmissions,
   saveLocalSubmission,
 } from "@/features/frontend/submissions/local-submissions";
@@ -77,6 +82,7 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   const [submissions, setSubmissions] = useState<LocalSubmissionAttempt[]>([]);
   const [pendingSubmit, setPendingSubmit] = useState(false);
   const [submitNotice, setSubmitNotice] = useState("");
+  const [expandedAttemptId, setExpandedAttemptId] = useState<string | null>(null);
 
   const previewHtml = useMemo(
     () =>
@@ -115,6 +121,7 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
       };
 
       setSubmissions(saveLocalSubmission(attempt));
+      setExpandedAttemptId(attempt.id);
       setSubmitNotice(
         nextStatus === "passed"
           ? "Submitted: all checks passed."
@@ -194,6 +201,42 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
     setSubmitNotice("Attempt restored into the editor.");
   }
 
+  function deleteSubmission(attemptId: string) {
+    const nextSubmissions = deleteLocalSubmission(problem.slug, attemptId);
+    setSubmissions(nextSubmissions);
+    setExpandedAttemptId((currentId) => (currentId === attemptId ? null : currentId));
+    setSubmitNotice("Attempt deleted from local history.");
+  }
+
+  function clearHistory() {
+    setSubmissions(clearLocalSubmissions(problem.slug));
+    setExpandedAttemptId(null);
+    setSubmitNotice("Local history cleared for this problem.");
+  }
+
+  const bestSubmissionId = useMemo(() => {
+    if (submissions.length === 0) {
+      return null;
+    }
+
+    return submissions.reduce((best, attempt) => {
+      if (attempt.passedCount > best.passedCount) {
+        return attempt;
+      }
+
+      if (
+        attempt.passedCount === best.passedCount &&
+        attempt.totalCount > best.totalCount
+      ) {
+        return attempt;
+      }
+
+      return best;
+    }, submissions[0]).id;
+  }, [submissions]);
+
+  const latestSubmission = submissions[0];
+
   const activeCode = activeFile === "app" ? appCode : cssCode;
   const activeLanguage = activeFile === "app" ? "javascript" : "css";
   const passedCount = testResults.filter((test) => test.passed).length;
@@ -222,13 +265,21 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
       <header className="workspaceHeader">
         <div className="workspaceTitle">
           <span className="backButton">&lt;</span>
-          <div>
+            <div>
             <h1>{problem.title}</h1>
             <div>
               <span className="workspaceDifficulty">{problem.difficulty}</span>
               <span>•</span>
               <Clock size={14} />
               <span>{problem.estimatedMinutes} mins</span>
+              {latestSubmission ? (
+                <>
+                  <span>•</span>
+                  <span>
+                    Latest {latestSubmission.passedCount}/{latestSubmission.totalCount}
+                  </span>
+                </>
+              ) : null}
             </div>
           </div>
         </div>
@@ -333,28 +384,98 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
 
           {activePanel === "history" && (
             <div>
-              <h2>History</h2>
+              <div className="historyHeader">
+                <h2>History</h2>
+                {submissions.length > 0 ? (
+                  <button onClick={clearHistory}>
+                    <Trash2 size={14} />
+                    Clear
+                  </button>
+                ) : null}
+              </div>
               {submitNotice ? <p className="submissionNotice">{submitNotice}</p> : null}
               {submissions.length === 0 ? (
                 <p>No local attempts yet. Submit once to start tracking history.</p>
               ) : (
                 <div className="submissionList">
-                  {submissions.map((attempt) => (
-                    <article key={attempt.id} className="submissionItem">
-                      <div>
-                        <strong>
-                          {attempt.passedCount}/{attempt.totalCount} checks
-                        </strong>
-                        <span>{new Date(attempt.submittedAt).toLocaleString()}</span>
-                      </div>
-                      <small className={`submissionStatus ${attempt.status}`}>
-                        {attempt.status}
-                      </small>
-                      <button onClick={() => restoreSubmission(attempt)}>
-                        Restore
-                      </button>
-                    </article>
-                  ))}
+                  {submissions.map((attempt) => {
+                    const isExpanded = expandedAttemptId === attempt.id;
+                    const isBest = bestSubmissionId === attempt.id;
+
+                    return (
+                      <article key={attempt.id} className="submissionItem">
+                        <button
+                          className="submissionSummary"
+                          onClick={() =>
+                            setExpandedAttemptId(isExpanded ? null : attempt.id)
+                          }
+                        >
+                          <div>
+                            <strong>
+                              {attempt.passedCount}/{attempt.totalCount} checks
+                            </strong>
+                            <span>{new Date(attempt.submittedAt).toLocaleString()}</span>
+                          </div>
+                          <div className="submissionBadges">
+                            {isBest ? (
+                              <small className="bestAttemptBadge">
+                                <Award size={12} />
+                                Best
+                              </small>
+                            ) : null}
+                            <small className={`submissionStatus ${attempt.status}`}>
+                              {attempt.status}
+                            </small>
+                            <ChevronDown
+                              className={isExpanded ? "expanded" : ""}
+                              size={16}
+                            />
+                          </div>
+                        </button>
+
+                        {isExpanded ? (
+                          <div className="submissionDetails">
+                            {attempt.runtimeError ? (
+                              <p className="submissionRuntimeError">
+                                {attempt.runtimeError}
+                              </p>
+                            ) : null}
+                            <ul>
+                              {attempt.tests.map((test) => (
+                                <li
+                                  key={test.name}
+                                  className={test.passed ? "passed" : "failed"}
+                                >
+                                  {test.passed ? (
+                                    <CheckCircle2 size={15} />
+                                  ) : (
+                                    <XCircle size={15} />
+                                  )}
+                                  <span>
+                                    {test.name}
+                                    {!test.passed && test.message ? (
+                                      <em>{test.message}</em>
+                                    ) : null}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                            <div className="submissionActions">
+                              <button onClick={() => restoreSubmission(attempt)}>
+                                Restore
+                              </button>
+                              <button
+                                className="dangerAction"
+                                onClick={() => deleteSubmission(attempt.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        ) : null}
+                      </article>
+                    );
+                  })}
                 </div>
               )}
             </div>

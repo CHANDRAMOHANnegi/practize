@@ -997,14 +997,48 @@ select {
   gap: 12px;
 }
 
-.submissionItem {
-  display: grid;
-  grid-template-columns: 1fr auto;
+.historyHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  padding: 14px;
+}
+
+.historyHeader h2 {
+  flex: 1;
+}
+
+.historyHeader button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid rgba(251, 93, 108, 0.28);
+  border-radius: 8px;
+  color: #fda4af;
+  background: rgba(251, 93, 108, 0.08);
+  cursor: pointer;
+}
+
+.submissionItem {
   border: 1px solid #262a34;
   border-radius: 8px;
   background: #121419;
+  overflow: hidden;
+}
+
+.submissionSummary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
 }
 
 .submissionItem strong {
@@ -1020,14 +1054,36 @@ select {
   font-size: 13px;
 }
 
-.submissionItem button {
-  grid-column: 1 / -1;
-  height: 36px;
-  border: 1px solid #323743;
-  border-radius: 8px;
-  color: #d7dce6;
-  background: #1d2027;
-  cursor: pointer;
+.submissionBadges {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.submissionBadges svg {
+  color: #8c98ad;
+  transition: transform 160ms ease;
+}
+
+.submissionBadges svg.expanded {
+  transform: rotate(180deg);
+}
+
+.bestAttemptBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #f8d36d;
+  background: rgba(248, 189, 50, 0.12);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.bestAttemptBadge svg {
+  color: #f8d36d;
 }
 
 .submissionStatus {
@@ -1052,6 +1108,80 @@ select {
 .submissionStatus.error {
   color: var(--red);
   background: rgba(251, 93, 108, 0.12);
+}
+
+.submissionDetails {
+  display: grid;
+  gap: 14px;
+  padding: 0 14px 14px;
+}
+
+.submissionDetails ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #252a34;
+  border-radius: 8px;
+  background: #0d0f13;
+  list-style: none;
+}
+
+.submissionDetails li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 8px;
+  margin: 0;
+  color: #a8b2c4;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.submissionDetails li.passed svg {
+  color: var(--green);
+}
+
+.submissionDetails li.failed svg {
+  color: var(--red);
+}
+
+.submissionDetails em {
+  display: block;
+  margin-top: 3px;
+  color: #748197;
+  font-style: normal;
+}
+
+.submissionRuntimeError {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(251, 93, 108, 0.24);
+  border-radius: 8px;
+  color: #fda4af !important;
+  background: rgba(251, 93, 108, 0.08);
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.submissionActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.submissionActions button {
+  height: 36px;
+  border: 1px solid #323743;
+  border-radius: 8px;
+  color: #d7dce6;
+  background: #1d2027;
+  cursor: pointer;
+}
+
+.submissionActions .dangerAction {
+  border-color: rgba(251, 93, 108, 0.3);
+  color: #fda4af;
+  background: rgba(251, 93, 108, 0.08);
 }
 
 @media (max-width: 1120px) {

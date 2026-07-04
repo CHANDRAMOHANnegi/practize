@@ -34,14 +34,36 @@ export function saveLocalSubmission(
   const currentAttempts = loadLocalSubmissions(attempt.problemSlug);
   const nextAttempts = [attempt, ...currentAttempts].slice(0, 20);
 
+  return replaceLocalSubmissions(attempt.problemSlug, nextAttempts);
+}
+
+export function replaceLocalSubmissions(
+  problemSlug: string,
+  attempts: LocalSubmissionAttempt[],
+): LocalSubmissionAttempt[] {
   if (isBrowser()) {
-    window.localStorage.setItem(
-      keyFor(attempt.problemSlug),
-      JSON.stringify(nextAttempts),
-    );
+    window.localStorage.setItem(keyFor(problemSlug), JSON.stringify(attempts));
   }
 
-  return nextAttempts;
+  return attempts;
+}
+
+export function deleteLocalSubmission(
+  problemSlug: string,
+  attemptId: string,
+): LocalSubmissionAttempt[] {
+  return replaceLocalSubmissions(
+    problemSlug,
+    loadLocalSubmissions(problemSlug).filter((attempt) => attempt.id !== attemptId),
+  );
+}
+
+export function clearLocalSubmissions(problemSlug: string): LocalSubmissionAttempt[] {
+  if (isBrowser()) {
+    window.localStorage.removeItem(keyFor(problemSlug));
+  }
+
+  return [];
 }
 
 export function summarizeLocalSubmissions(

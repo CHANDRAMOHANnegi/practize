@@ -166,3 +166,16 @@ These files are for structure and metadata reference only. We will not copy full
   - Needs Work
 - Added per-card progress badges and best-check counts so workspace submissions are visible from the problem list.
 - Kept progress local-only for the MVP; backend user accounts and synced progress come later.
+
+### History V2
+
+- Added local history mutation helpers for deleting one attempt and clearing a problem's history.
+- Expanded the workspace History tab:
+  - expandable attempt rows
+  - per-check pass/fail details
+  - runtime error display
+  - best-attempt badge
+  - restore and delete controls per attempt
+  - clear-history control for the current problem
+- Added latest attempt score to the workspace title metadata.
+- Kept all history state in browser `localStorage`; synced user history remains a backend/auth milestone.
