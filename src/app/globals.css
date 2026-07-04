@@ -811,6 +811,44 @@ select {
   color: var(--orange);
 }
 
+.solutionFileTabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 0;
+  border: 1px solid #252a34;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.solutionFileTabs button {
+  height: 42px;
+  border: 0;
+  color: #748197;
+  background: #15171d;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.solutionFileTabs button + button {
+  border-left: 1px solid #252a34;
+}
+
+.solutionFileTabs button.active {
+  color: #dce4f2;
+  background: #24262c;
+}
+
+.solutionEditorShell {
+  height: 520px;
+  margin-bottom: 32px;
+  border: 1px solid #252a34;
+  border-radius: 0 0 8px 8px;
+  background: #202020;
+  overflow: hidden;
+}
+
 .editorPane {
   display: flex;
   flex-direction: column;

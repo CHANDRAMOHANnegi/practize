@@ -83,6 +83,27 @@ function genericSolutionNotes(problem: MetadataProblem) {
   ];
 }
 
+function genericSolutionCodeFor(problem: MetadataProblem) {
+  return `const { useState } = React;
+
+function App() {
+  const [items, setItems] = useState(['First item', 'Second item']);
+
+  return (
+    <main className="demo-shell">
+      <h1>${problem.title}</h1>
+      <p>Replace this sample with the complete interaction for this problem.</p>
+      <button onClick={() => setItems([...items, \`Item \${items.length + 1}\`])}>
+        Add item
+      </button>
+      <ul>
+        {items.map((item) => <li key={item}>{item}</li>)}
+      </ul>
+    </main>
+  );
+}`;
+}
+
 function genericTestScript(problem: MetadataProblem) {
   return `
     const tests = [];
@@ -104,6 +125,8 @@ export const frontendProblems: FrontendProblem[] = (metadata as MetadataProblem[
       requirements: override?.requirements ?? toRequirements(problem),
       constraints: override?.constraints ?? genericConstraints(),
       solutionNotes: override?.solutionNotes ?? genericSolutionNotes(problem),
+      solutionCode: override?.solutionCode || genericSolutionCodeFor(problem),
+      solutionCss: override?.solutionCss || genericStarterCssFor(),
       starterCode: override?.starterCode ?? genericStarterCodeFor(problem),
       starterCss: override?.starterCss ?? genericStarterCssFor(),
       testScript: override?.testScript ?? genericTestScript(problem),

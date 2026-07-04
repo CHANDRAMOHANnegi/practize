@@ -74,6 +74,7 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   const [appCode, setAppCode] = useState(problem.starterCode);
   const [cssCode, setCssCode] = useState(problem.starterCss);
   const [activeFile, setActiveFile] = useState<WorkspaceFile>("app");
+  const [activeSolutionFile, setActiveSolutionFile] = useState<WorkspaceFile>("app");
   const [activePanel, setActivePanel] = useState<ProblemPanel>("problem");
   const [runId, setRunId] = useState(0);
   const [status, setStatus] = useState<RunStatus>("idle");
@@ -255,6 +256,23 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
     }),
     [],
   );
+  const solutionEditorOptions = useMemo(
+    () => ({
+      automaticLayout: true,
+      domReadOnly: true,
+      fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
+      fontSize: 13,
+      lineHeight: 22,
+      minimap: { enabled: false },
+      padding: { top: 14, bottom: 14 },
+      readOnly: true,
+      renderLineHighlight: "none" as const,
+      scrollBeyondLastLine: false,
+      tabSize: 2,
+      wordWrap: "on" as const,
+    }),
+    [],
+  );
 
   const handleEditorMount: OnMount = (editor, monaco) => {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, runEvaluation);
@@ -372,6 +390,35 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
                   <li key={note}>{note}</li>
                 ))}
               </ul>
+              <h2>Solution Files</h2>
+              <div className="solutionFileTabs">
+                <button
+                  className={activeSolutionFile === "app" ? "active" : ""}
+                  onClick={() => setActiveSolutionFile("app")}
+                >
+                  App.js
+                </button>
+                <button
+                  className={activeSolutionFile === "css" ? "active" : ""}
+                  onClick={() => setActiveSolutionFile("css")}
+                >
+                  styles.css
+                </button>
+              </div>
+              <div className="solutionEditorShell">
+                <MonacoEditor
+                  beforeMount={handleEditorBeforeMount}
+                  language={activeSolutionFile === "app" ? "javascript" : "css"}
+                  options={solutionEditorOptions}
+                  path={`${problem.slug}-solution-${activeSolutionFile}.${activeSolutionFile === "app" ? "jsx" : "css"}`}
+                  theme="interview-studio-dark"
+                  value={
+                    activeSolutionFile === "app"
+                      ? problem.solutionCode
+                      : problem.solutionCss
+                  }
+                />
+              </div>
             </>
           )}
 

@@ -12,6 +12,8 @@ export type FrontendProblem = {
   requirements: string[];
   constraints: string[];
   solutionNotes: string[];
+  solutionCode: string;
+  solutionCss: string;
   starterCode: string;
   starterCss: string;
   testScript: string;

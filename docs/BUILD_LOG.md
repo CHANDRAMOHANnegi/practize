@@ -179,3 +179,22 @@ These files are for structure and metadata reference only. We will not copy full
   - clear-history control for the current problem
 - Added latest attempt score to the workspace title metadata.
 - Kept all history state in browser `localStorage`; synced user history remains a backend/auth milestone.
+
+### Tag Input Solution V1
+
+- Expanded the frontend problem model with `solutionCode` and `solutionCss`.
+- Updated the Solution tab to render problem-owned notes plus final `App.js` and `styles.css`.
+- Polished the Tag Input solution first:
+  - controlled input state
+  - Enter key handling
+  - trim and empty-input rejection
+  - duplicate prevention
+  - immutable add/remove updates
+  - accessible remove buttons
+- Also added a full Accordion solution as the next polished solution target:
+  - active index state model
+  - toggle-open/toggle-close logic
+  - single-open-row behavior
+  - semantic button controls
+  - `aria-expanded` accessibility
+  - conditional answer rendering
