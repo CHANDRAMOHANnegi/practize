@@ -336,6 +336,43 @@ select {
   font-size: 18px;
 }
 
+.progressOverview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.progressOverview button {
+  display: grid;
+  gap: 3px;
+  min-height: 72px;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: #8d98aa;
+  background: #14151a;
+  text-align: left;
+  cursor: pointer;
+}
+
+.progressOverview button.active,
+.progressOverview button:hover {
+  border-color: #465168;
+  background: #1d2028;
+}
+
+.progressOverview strong {
+  color: #f4f5f7;
+  font-size: 24px;
+}
+
+.progressOverview span {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .companySelect select {
   height: auto;
   padding: 0;
@@ -380,6 +417,41 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.cardProgressRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: #7f8ba0;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.cardProgressRow small {
+  color: #64748b;
+}
+
+.progressBadge {
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.progressPassed {
+  color: var(--green);
+  background: rgba(36, 199, 142, 0.12);
+  border: 1px solid rgba(36, 199, 142, 0.24);
+}
+
+.progressAttempted {
+  color: #93c5fd;
+  background: rgba(91, 140, 255, 0.12);
+  border: 1px solid rgba(91, 140, 255, 0.24);
 }
 
 .cardMeta {
@@ -1020,6 +1092,10 @@ select {
 
   .filterBar {
     grid-template-columns: 1fr;
+  }
+
+  .progressOverview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .problemGrid {

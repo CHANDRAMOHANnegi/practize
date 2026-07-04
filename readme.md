@@ -15,6 +15,7 @@ We are building one module first:
 - Real runnable content for the first three problems: Tag Input, Star Rating, and Accordion
 - Per-problem test scripts, constraints, starter files, and solution notes
 - Local Submit flow that saves attempts and displays them in the History tab
+- Local progress dashboard showing attempted/passed state from saved submissions
 - Structured 102-problem metadata inventory with original generated summaries and requirements
 
 HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come later.

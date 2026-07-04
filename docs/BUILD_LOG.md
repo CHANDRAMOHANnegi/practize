@@ -154,3 +154,15 @@ These files are for structure and metadata reference only. We will not copy full
   - `npm run build`
   - browser Submit on Accordion saved an attempt and switched to History
   - Restore loaded the saved attempt back into the editor
+
+### Frontend Progress V1
+
+- Added local submission summaries derived from saved attempts.
+- Wired the `/frontend` listing to read local attempt progress from `localStorage`.
+- Added dashboard progress filters:
+  - All
+  - Attempted
+  - Passed
+  - Needs Work
+- Added per-card progress badges and best-check counts so workspace submissions are visible from the problem list.
+- Kept progress local-only for the MVP; backend user accounts and synced progress come later.

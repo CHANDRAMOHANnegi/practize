@@ -13,3 +13,15 @@ export type LocalSubmissionAttempt = {
   tests: TestResult[];
   runtimeError?: string;
 };
+
+export type LocalSubmissionSummary = {
+  problemSlug: string;
+  attempts: number;
+  latestStatus: PreviewStatus;
+  latestPassedCount: number;
+  latestTotalCount: number;
+  lastSubmittedAt: string;
+  bestPassedCount: number;
+  bestTotalCount: number;
+  hasPassed: boolean;
+};

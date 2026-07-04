@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Code2 } from "lucide-react";
 import type { FrontendProblem } from "@/types/problem";
 import { cn } from "@/lib/cn";
+import type { LocalSubmissionSummary } from "@/features/frontend/submissions/types";
 
 const difficultyClass: Record<FrontendProblem["difficulty"], string> = {
   Easy: "badgeEasy",
@@ -12,9 +13,16 @@ const difficultyClass: Record<FrontendProblem["difficulty"], string> = {
 
 type ProblemCardProps = {
   problem: FrontendProblem;
+  progress?: LocalSubmissionSummary;
 };
 
-export function ProblemCard({ problem }: ProblemCardProps) {
+export function ProblemCard({ problem, progress }: ProblemCardProps) {
+  const progressLabel = progress?.hasPassed
+    ? "Passed"
+    : progress
+      ? "Attempted"
+      : null;
+
   return (
     <Link className="problemCard" href={`/frontend/${problem.slug}`}>
       <div className="cardTopline">
@@ -26,6 +34,23 @@ export function ProblemCard({ problem }: ProblemCardProps) {
         </div>
         <Code2 className="cardCodeIcon" size={25} />
       </div>
+
+      {progress && progressLabel && (
+        <div className="cardProgressRow">
+          <span
+            className={cn(
+              "progressBadge",
+              progress.hasPassed ? "progressPassed" : "progressAttempted",
+            )}
+          >
+            {progressLabel}
+          </span>
+          <span>
+            Best {progress.bestPassedCount}/{progress.bestTotalCount} checks
+          </span>
+          <small>{progress.attempts} attempt{progress.attempts === 1 ? "" : "s"}</small>
+        </div>
+      )}
 
       <h3>{problem.title}</h3>
       <p>{problem.summary}</p>
