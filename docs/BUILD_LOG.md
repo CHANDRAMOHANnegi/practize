@@ -79,3 +79,18 @@ These files are for structure and metadata reference only. We will not copy full
   - removes a tag by clicking close
 - Verified the starter Tag Input code reports `3/5` checks passed because the two TODO interactions are intentionally incomplete.
 - Note: the current iframe runner uses browser-loaded React/Babel scripts. This is good for MVP validation; later we should bundle the runtime or move evaluation into a more controlled sandbox.
+
+### Workspace Engine V2
+
+- Added `monaco-editor` as a direct dependency alongside `@monaco-editor/react`.
+- Replaced the workspace textarea with a client-only Monaco editor.
+- Added JSX/JavaScript and CSS language switching for the `App.js` and `styles.css` tabs.
+- Added a custom dark Monaco theme to match the workspace.
+- Added editor basics:
+  - line numbers
+  - syntax highlighting
+  - auto layout
+  - word wrap
+  - minimap disabled
+  - Command/Ctrl+S runs checks
+- Verified Monaco renders in the browser and Run Code still reports the expected Tag Input starter result: `3/5` checks passed.

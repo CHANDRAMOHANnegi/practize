@@ -10,6 +10,9 @@ export type FrontendProblem = {
   estimatedMinutes: number;
   summary: string;
   requirements: string[];
+  constraints: string[];
+  solutionNotes: string[];
   starterCode: string;
   starterCss: string;
+  testScript: string;
 };

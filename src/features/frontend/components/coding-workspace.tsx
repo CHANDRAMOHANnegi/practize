@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   CheckCircle2,
   Clock,
@@ -12,13 +13,20 @@ import {
   XCircle,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import type { BeforeMount, OnMount } from "@monaco-editor/react";
 import type { FrontendProblem } from "@/types/problem";
+
+const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
+  ssr: false,
+  loading: () => <div className="editorLoading">Loading editor...</div>,
+});
 
 type CodingWorkspaceProps = {
   problem: FrontendProblem;
 };
 
 type WorkspaceFile = "app" | "css";
+type ProblemPanel = "problem" | "solution" | "discuss" | "history";
 type RunStatus = "idle" | "running" | "passed" | "failed" | "error";
 type TestResult = {
   name: string;
@@ -38,57 +46,37 @@ function escapeInlineScript(value: string) {
   return value.replaceAll("</script", "<\\/script");
 }
 
-function tagInputTestsScript() {
-  return `
-    const tests = [];
-    const record = (name, passed, message) => tests.push({ name, passed, message });
-    const root = document.querySelector('#root');
-    const renderedText = () => root ? root.textContent : '';
-    const input = document.querySelector('input[placeholder="Add a tag..."]');
-    record('Renders the tag input field', Boolean(input), 'Expected an input with placeholder "Add a tag...".');
-    record('Shows the initial Frontend tag', renderedText().includes('Frontend'), 'Expected the initial Frontend tag.');
-    record('Shows the initial React tag', renderedText().includes('React'), 'Expected the initial React tag.');
-
-    if (input) {
-      const valueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
-      valueSetter.call(input, 'Vue');
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-      await new Promise((resolve) => setTimeout(resolve, 80));
-      record('Adds a new tag when Enter is pressed', renderedText().includes('Vue'), 'Type a valid tag and add it on Enter.');
-    }
-
-    const removeButton = document.querySelector('.remove-btn');
-    if (removeButton) {
-      removeButton.click();
-      await new Promise((resolve) => setTimeout(resolve, 80));
-      record('Removes a tag when close is clicked', !renderedText().includes('Frontend'), 'The clicked tag should be removed from state.');
-    } else {
-      record('Removes a tag when close is clicked', false, 'Expected a .remove-btn button.');
-    }
-  `;
-}
-
-function genericTestsScript(problemTitle: string) {
-  return `
-    const tests = [];
-    const record = (name, passed, message) => tests.push({ name, passed, message });
-    record('Renders an application root', Boolean(document.querySelector('#root')?.children.length), 'Expected React to render content.');
-    record('Shows the problem title', document.querySelector('#root')?.textContent.includes(${JSON.stringify(problemTitle)}), 'Expected the component to display the problem title.');
-    record('Includes at least one interactive control', Boolean(document.querySelector('button, input, select, textarea')), 'Expected an interactive element.');
-  `;
-}
-
-function testsScriptFor(problem: FrontendProblem) {
-  return problem.slug === "tag-input-component"
-    ? tagInputTestsScript()
-    : genericTestsScript(problem.title);
-}
+const handleEditorBeforeMount: BeforeMount = (monaco) => {
+  monaco.editor.defineTheme("interview-studio-dark", {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "comment", foreground: "6A9955" },
+      { token: "keyword", foreground: "C586C0" },
+      { token: "string", foreground: "CE9178" },
+      { token: "number", foreground: "B5CEA8" },
+      { token: "type.identifier", foreground: "4EC9B0" },
+    ],
+    colors: {
+      "editor.background": "#202020",
+      "editor.foreground": "#d7dce6",
+      "editor.lineHighlightBackground": "#262626",
+      "editorLineNumber.foreground": "#71717a",
+      "editorLineNumber.activeForeground": "#d8dee9",
+      "editor.selectionBackground": "#334155",
+      "editorCursor.foreground": "#f97316",
+      "editorGutter.background": "#202020",
+      "scrollbarSlider.background": "#3f3f46",
+      "scrollbarSlider.hoverBackground": "#52525b",
+    },
+  });
+};
 
 export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   const [appCode, setAppCode] = useState(problem.starterCode);
   const [cssCode, setCssCode] = useState(problem.starterCss);
   const [activeFile, setActiveFile] = useState<WorkspaceFile>("app");
+  const [activePanel, setActivePanel] = useState<ProblemPanel>("problem");
   const [runId, setRunId] = useState(0);
   const [status, setStatus] = useState<RunStatus>("idle");
   const [testResults, setTestResults] = useState<TestResult[]>([]);
@@ -103,7 +91,7 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
         root.render(<App />);
 
         async function runWorkspaceTests() {
-          ${testsScriptFor(problem)}
+          ${problem.testScript}
 
           const passed = tests.every((test) => test.passed);
           parent.postMessage({
@@ -212,7 +200,27 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   }
 
   const activeCode = activeFile === "app" ? appCode : cssCode;
+  const activeLanguage = activeFile === "app" ? "javascript" : "css";
   const passedCount = testResults.filter((test) => test.passed).length;
+  const editorOptions = useMemo(
+    () => ({
+      automaticLayout: true,
+      fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
+      fontSize: 17,
+      lineHeight: 28,
+      minimap: { enabled: false },
+      padding: { top: 24, bottom: 24 },
+      renderLineHighlight: "line" as const,
+      scrollBeyondLastLine: false,
+      tabSize: 2,
+      wordWrap: "on" as const,
+    }),
+    [],
+  );
+
+  const handleEditorMount: OnMount = (editor, monaco) => {
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, runEvaluation);
+  };
 
   return (
     <div className="workspaceShell">
@@ -247,54 +255,91 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
 
       <aside className="workspaceProblem">
         <div className="problemTabs">
-          <button className="active">
+          <button
+            className={activePanel === "problem" ? "active" : ""}
+            onClick={() => setActivePanel("problem")}
+          >
             <Code2 size={16} />
             Problem
           </button>
-          <button>
+          <button
+            className={activePanel === "solution" ? "active" : ""}
+            onClick={() => setActivePanel("solution")}
+          >
             <Lightbulb size={16} />
             Solution
           </button>
-          <button>
+          <button
+            className={activePanel === "discuss" ? "active" : ""}
+            onClick={() => setActivePanel("discuss")}
+          >
             <MessageCircle size={16} />
             Discuss
           </button>
-          <button>
+          <button
+            className={activePanel === "history" ? "active" : ""}
+            onClick={() => setActivePanel("history")}
+          >
             <History size={16} />
             History
           </button>
         </div>
 
         <div className="problemScroll">
-          <div className="popularBlock">
-            <span>Popular At</span>
-            <div>
-              {problem.companies.slice(0, 5).map((company) => (
-                <em key={company}>{company}</em>
-              ))}
+          {activePanel === "problem" && (
+            <>
+              <div className="popularBlock">
+                <span>Popular At</span>
+                <div>
+                  {problem.companies.slice(0, 5).map((company) => (
+                    <em key={company}>{company}</em>
+                  ))}
+                </div>
+              </div>
+
+              <h2>Description</h2>
+              <p>{problem.summary}</p>
+
+              <h2>Features</h2>
+              <ul>
+                {problem.requirements.map((requirement) => (
+                  <li key={requirement}>{requirement}</li>
+                ))}
+              </ul>
+
+              <h2>Constraints</h2>
+              <ul>
+                {problem.constraints.map((constraint) => (
+                  <li key={constraint}>{constraint}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {activePanel === "solution" && (
+            <>
+              <h2>Solution Notes</h2>
+              <ul>
+                {problem.solutionNotes.map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {activePanel === "discuss" && (
+            <div className="emptyPanel">
+              <h2>Discuss</h2>
+              <p>Discussion threads will land after auth and persistence are added.</p>
             </div>
-          </div>
+          )}
 
-          <h2>Description</h2>
-          <p>
-            Build a <strong>{problem.title}</strong> that allows users to complete
-            the core interaction cleanly. The implementation should feel stable,
-            accessible, and close to production quality.
-          </p>
-
-          <h2>Features</h2>
-          <ul>
-            {problem.requirements.map((requirement) => (
-              <li key={requirement}>{requirement}</li>
-            ))}
-          </ul>
-
-          <h2>Constraints</h2>
-          <ul>
-            <li>Use React state and event handlers directly.</li>
-            <li>Keep the UI responsive and keyboard-friendly.</li>
-            <li>Do not rely on external component libraries.</li>
-          </ul>
+          {activePanel === "history" && (
+            <div className="emptyPanel">
+              <h2>History</h2>
+              <p>Submission history will track attempts once user accounts exist.</p>
+            </div>
+          )}
         </div>
       </aside>
 
@@ -324,19 +369,27 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
           </div>
         </header>
 
-        <textarea
-          className="codeEditor"
-          value={activeCode}
-          onChange={(event) => {
+        <div className="monacoEditorShell">
+          <MonacoEditor
+          key={activeFile}
+          beforeMount={handleEditorBeforeMount}
+          defaultLanguage={activeLanguage}
+          language={activeLanguage}
+          onChange={(value) => {
             if (activeFile === "app") {
-              setAppCode(event.target.value);
+              setAppCode(value ?? "");
             } else {
-              setCssCode(event.target.value);
+              setCssCode(value ?? "");
             }
             setStatus("idle");
           }}
-          spellCheck={false}
+          onMount={handleEditorMount}
+          options={editorOptions}
+          path={`${problem.slug}-${activeFile}.${activeFile === "app" ? "jsx" : "css"}`}
+          theme="interview-studio-dark"
+          value={activeCode}
         />
+        </div>
       </main>
 
       <aside className="previewPane">

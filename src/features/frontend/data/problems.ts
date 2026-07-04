@@ -1,5 +1,6 @@
 import type { FrontendProblem } from "@/types/problem";
 import metadata from "./frontend-problems-metadata.json";
+import { frontendProblemOverrides } from "./problem-overrides";
 
 type MetadataProblem = {
   index: number;
@@ -25,46 +26,7 @@ function toRequirements(problem: MetadataProblem) {
   ];
 }
 
-function starterCodeFor(problem: MetadataProblem) {
-  if (problem.slug === "tag-input-component") {
-    return `const { useState } = React;
-
-function App() {
-  const [tags, setTags] = useState(['Frontend', 'React']);
-  const [inputValue, setInputValue] = useState('');
-
-  const handleKeyDown = (e) => {
-    // TODO: Add tag when Enter is pressed
-    // Hint: Check e.key === 'Enter' and validate inputValue
-  };
-
-  const removeTag = (indexToRemove) => {
-    // TODO: Remove the tag at the given index
-    // Hint: Use filter to exclude the tag
-  };
-
-  return (
-    <div className="container">
-      <div className="tag-box">
-        {tags.map((tag, index) => (
-          <div key={index} className="tag">
-            <span>{tag}</span>
-            <button onClick={() => removeTag(index)} className="remove-btn">x</button>
-          </div>
-        ))}
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Add a tag..."
-        />
-      </div>
-    </div>
-  );
-}`;
-  }
-
+function genericStarterCodeFor(problem: MetadataProblem) {
   return `const { useState } = React;
 
 function App() {
@@ -83,59 +45,7 @@ function App() {
 }`;
 }
 
-function starterCssFor(problem: MetadataProblem) {
-  if (problem.slug === "tag-input-component") {
-    return `.container {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 32px;
-  background: #f6f7fb;
-}
-
-.tag-box {
-  width: min(420px, 100%);
-  min-height: 260px;
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 22px;
-  border: 2px solid #dedee5;
-  border-radius: 14px;
-  background: #fff;
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 38px;
-  padding: 0 12px;
-  border-radius: 999px;
-  color: #fff;
-  background: linear-gradient(90deg, #6b6fe8, #8756bf);
-}
-
-.remove-btn {
-  width: 22px;
-  height: 22px;
-  border: 0;
-  border-radius: 999px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.25);
-  cursor: pointer;
-}
-
-input {
-  min-width: 160px;
-  flex: 1;
-  border: 0;
-  outline: 0;
-  font-size: 16px;
-}`;
-  }
-
+function genericStarterCssFor() {
   return `.demo-shell {
   min-height: 100vh;
   display: grid;
@@ -157,14 +67,48 @@ button {
 }`;
 }
 
+function genericConstraints() {
+  return [
+    "Use React state and event handlers directly.",
+    "Keep the UI responsive and keyboard-friendly.",
+    "Do not rely on external component libraries.",
+  ];
+}
+
+function genericSolutionNotes(problem: MetadataProblem) {
+  return [
+    `Identify the core state needed for ${problem.title}.`,
+    "Render the base UI first, then wire one interaction at a time.",
+    "Keep derived UI state computed from React state instead of duplicating it.",
+  ];
+}
+
+function genericTestScript(problem: MetadataProblem) {
+  return `
+    const tests = [];
+    const record = (name, passed, message) => tests.push({ name, passed, message });
+    const root = document.querySelector('#root');
+    record('Renders an application root', Boolean(root?.children.length), 'Expected React to render content.');
+    record('Shows the problem title', Boolean(root?.textContent.includes(${JSON.stringify(problem.title)})), 'Expected the component to display the problem title.');
+    record('Includes at least one interactive control', Boolean(document.querySelector('button, input, select, textarea')), 'Expected an interactive element.');
+  `;
+}
+
 export const frontendProblems: FrontendProblem[] = (metadata as MetadataProblem[]).map(
-  (problem) => ({
-    ...problem,
-    summary: toSummary(problem),
-    requirements: toRequirements(problem),
-    starterCode: starterCodeFor(problem),
-    starterCss: starterCssFor(problem),
-  }),
+  (problem) => {
+    const override = frontendProblemOverrides[problem.slug];
+
+    return {
+      ...problem,
+      summary: override?.summary ?? toSummary(problem),
+      requirements: override?.requirements ?? toRequirements(problem),
+      constraints: override?.constraints ?? genericConstraints(),
+      solutionNotes: override?.solutionNotes ?? genericSolutionNotes(problem),
+      starterCode: override?.starterCode ?? genericStarterCodeFor(problem),
+      starterCss: override?.starterCss ?? genericStarterCssFor(),
+      testScript: override?.testScript ?? genericTestScript(problem),
+    };
+  },
 );
 
 export function getFrontendProblem(slug: string) {

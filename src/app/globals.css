@@ -799,19 +799,21 @@ select {
   background: var(--orange);
 }
 
-.codeEditor {
+.monacoEditorShell {
   flex: 1;
   width: 100%;
   min-height: 0;
-  padding: 28px 30px;
-  border: 0;
-  outline: 0;
-  resize: none;
-  color: #d7dce6;
+  background: #202020;
+  overflow: hidden;
+}
+
+.editorLoading {
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  color: #7f8ba0;
   background: #202020;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 18px;
-  line-height: 1.65;
 }
 
 .previewPane {
@@ -966,7 +968,7 @@ select {
     flex-wrap: wrap;
   }
 
-  .codeEditor {
+  .monacoEditorShell {
     min-height: 520px;
   }
 }

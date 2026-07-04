@@ -9,6 +9,7 @@ We are building one module first:
 - Frontend machine-coding problem list
 - Frontend problem workspace
 - ScaleMock-style dark workspace with problem, editor, live preview, and console panels
+- Monaco-powered `App.js` and `styles.css` editor tabs
 - Browser iframe runner for React starter code with `App.js` and `styles.css` tabs
 - First local test harness for the Tag Input problem
 - Structured 102-problem metadata inventory with original generated summaries and requirements
@@ -19,9 +20,10 @@ HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come
 
 - Next.js App Router
 - TypeScript
+- Monaco Editor via `@monaco-editor/react`
 - CSS modules/global CSS for the first MVP
 - Preview runner: iframe + React/Babel browser runtime
-- Future additions: Monaco Editor, React Flow, Zustand, Prisma, Postgres, Auth.js
+- Future additions: React Flow, Zustand, Prisma, Postgres, Auth.js
 
 ## Planned Routes
 
