@@ -909,6 +909,79 @@ select {
   font-style: normal;
 }
 
+.submissionNotice {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(36, 199, 142, 0.22);
+  border-radius: 8px;
+  color: #b8f4db !important;
+  background: rgba(36, 199, 142, 0.1);
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+}
+
+.submissionList {
+  display: grid;
+  gap: 12px;
+}
+
+.submissionItem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #262a34;
+  border-radius: 8px;
+  background: #121419;
+}
+
+.submissionItem strong {
+  display: block;
+  color: #eef2f8;
+  font-size: 16px;
+}
+
+.submissionItem span {
+  display: block;
+  margin-top: 4px;
+  color: #718096;
+  font-size: 13px;
+}
+
+.submissionItem button {
+  grid-column: 1 / -1;
+  height: 36px;
+  border: 1px solid #323743;
+  border-radius: 8px;
+  color: #d7dce6;
+  background: #1d2027;
+  cursor: pointer;
+}
+
+.submissionStatus {
+  align-self: start;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.submissionStatus.passed {
+  color: var(--green);
+  background: rgba(36, 199, 142, 0.12);
+}
+
+.submissionStatus.failed {
+  color: var(--yellow);
+  background: rgba(248, 189, 50, 0.12);
+}
+
+.submissionStatus.error {
+  color: var(--red);
+  background: rgba(251, 93, 108, 0.12);
+}
+
 @media (max-width: 1120px) {
   .topNav {
     padding: 0 22px;

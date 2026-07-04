@@ -137,3 +137,20 @@ These files are for structure and metadata reference only. We will not copy full
     - Tag Input: `3/5`
     - Star Rating: `2/4`
     - Accordion: `3/5`
+
+### Submit Flow V1
+
+- Added local submission attempt types and localStorage helpers.
+- Wired the top-level Submit button:
+  - if checks have not been run, Submit starts a run first
+  - when results return, the attempt is saved locally
+  - saved attempts include problem slug, timestamp, status, pass count, code, CSS, and test results
+- Replaced the History placeholder with a real local attempt list.
+- Added Restore for a saved attempt, which puts the saved `App.js` and `styles.css` back into the editor.
+- Added compact History styling for attempt rows, status badges, notices, and restore actions.
+- Verification:
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm run build`
+  - browser Submit on Accordion saved an attempt and switched to History
+  - Restore loaded the saved attempt back into the editor

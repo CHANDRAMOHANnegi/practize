@@ -14,6 +14,7 @@ We are building one module first:
 - Local preview runtime routes for React, ReactDOM, and Babel; no CDN dependency for the workspace runner
 - Real runnable content for the first three problems: Tag Input, Star Rating, and Accordion
 - Per-problem test scripts, constraints, starter files, and solution notes
+- Local Submit flow that saves attempts and displays them in the History tab
 - Structured 102-problem metadata inventory with original generated summaries and requirements
 
 HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come later.
@@ -25,6 +26,7 @@ HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come
 - Monaco Editor via `@monaco-editor/react`
 - CSS modules/global CSS for the first MVP
 - Preview runner: iframe + local React/ReactDOM/Babel browser runtime
+- Local persistence: browser `localStorage` for first-pass submission history
 - Future additions: React Flow, Zustand, Prisma, Postgres, Auth.js
 
 ## Planned Routes

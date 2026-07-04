@@ -12,7 +12,7 @@ import {
   RotateCcw,
   XCircle,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { BeforeMount, OnMount } from "@monaco-editor/react";
 import type { FrontendProblem } from "@/types/problem";
 import { createPreviewHtml } from "@/features/frontend/runner/create-preview-html";
@@ -20,6 +20,11 @@ import type {
   PreviewMessage,
   TestResult,
 } from "@/features/frontend/runner/types";
+import {
+  loadLocalSubmissions,
+  saveLocalSubmission,
+} from "@/features/frontend/submissions/local-submissions";
+import type { LocalSubmissionAttempt } from "@/features/frontend/submissions/types";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
@@ -69,6 +74,9 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   const [status, setStatus] = useState<RunStatus>("idle");
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [runtimeError, setRuntimeError] = useState("");
+  const [submissions, setSubmissions] = useState<LocalSubmissionAttempt[]>([]);
+  const [pendingSubmit, setPendingSubmit] = useState(false);
+  const [submitNotice, setSubmitNotice] = useState("");
 
   const previewHtml = useMemo(
     () =>
@@ -82,6 +90,42 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
   );
 
   useEffect(() => {
+    setSubmissions(loadLocalSubmissions(problem.slug));
+  }, [problem.slug]);
+
+  const persistSubmission = useCallback(
+    (
+      nextStatus: "passed" | "failed" | "error",
+      nextTests: TestResult[],
+      nextRuntimeError: string,
+    ) => {
+      const passedTests = nextTests.filter((test) => test.passed).length;
+      const attempt: LocalSubmissionAttempt = {
+        id: `${problem.slug}-${Date.now()}`,
+        problemSlug: problem.slug,
+        problemTitle: problem.title,
+        submittedAt: new Date().toISOString(),
+        status: nextStatus,
+        passedCount: passedTests,
+        totalCount: nextTests.length,
+        appCode,
+        cssCode,
+        tests: nextTests,
+        runtimeError: nextRuntimeError || undefined,
+      };
+
+      setSubmissions(saveLocalSubmission(attempt));
+      setSubmitNotice(
+        nextStatus === "passed"
+          ? "Submitted: all checks passed."
+          : `Submitted: ${passedTests}/${nextTests.length} checks passed.`,
+      );
+      setActivePanel("history");
+    },
+    [appCode, cssCode, problem.slug, problem.title],
+  );
+
+  useEffect(() => {
     function handlePreviewMessage(event: MessageEvent<PreviewMessage>) {
       if (event.data?.source !== "interview-studio-preview") {
         return;
@@ -91,20 +135,42 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
         return;
       }
 
-      setStatus(event.data.status);
-      setTestResults(event.data.tests ?? []);
-      setRuntimeError(event.data.error ?? "");
+      const nextStatus = event.data.status;
+      const nextTests = event.data.tests ?? [];
+      const nextRuntimeError = event.data.error ?? "";
+
+      setStatus(nextStatus);
+      setTestResults(nextTests);
+      setRuntimeError(nextRuntimeError);
+
+      if (pendingSubmit) {
+        persistSubmission(nextStatus, nextTests, nextRuntimeError);
+        setPendingSubmit(false);
+      }
     }
 
     window.addEventListener("message", handlePreviewMessage);
     return () => window.removeEventListener("message", handlePreviewMessage);
-  }, [runId]);
+  }, [pendingSubmit, persistSubmission, runId]);
 
   function runEvaluation() {
     setStatus("running");
     setRuntimeError("");
     setTestResults([]);
+    setSubmitNotice("");
     setRunId((currentRunId) => currentRunId + 1);
+  }
+
+  function submitAttempt() {
+    setSubmitNotice("");
+
+    if (status === "passed" || status === "failed" || status === "error") {
+      persistSubmission(status, testResults, runtimeError);
+      return;
+    }
+
+    setPendingSubmit(true);
+    runEvaluation();
   }
 
   function resetWorkspace() {
@@ -114,6 +180,18 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
     setStatus("idle");
     setRuntimeError("");
     setTestResults([]);
+    setPendingSubmit(false);
+    setSubmitNotice("");
+  }
+
+  function restoreSubmission(attempt: LocalSubmissionAttempt) {
+    setAppCode(attempt.appCode);
+    setCssCode(attempt.cssCode);
+    setActiveFile("app");
+    setStatus("idle");
+    setRuntimeError("");
+    setTestResults([]);
+    setSubmitNotice("Attempt restored into the editor.");
   }
 
   const activeCode = activeFile === "app" ? appCode : cssCode;
@@ -166,7 +244,9 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
             <Play size={17} />
             Run Code
           </button>
-          <button className="submitButton">Submit</button>
+          <button className="submitButton" onClick={submitAttempt}>
+            {pendingSubmit ? "Submitting..." : "Submit"}
+          </button>
         </div>
       </header>
 
@@ -252,9 +332,31 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
           )}
 
           {activePanel === "history" && (
-            <div className="emptyPanel">
+            <div>
               <h2>History</h2>
-              <p>Submission history will track attempts once user accounts exist.</p>
+              {submitNotice ? <p className="submissionNotice">{submitNotice}</p> : null}
+              {submissions.length === 0 ? (
+                <p>No local attempts yet. Submit once to start tracking history.</p>
+              ) : (
+                <div className="submissionList">
+                  {submissions.map((attempt) => (
+                    <article key={attempt.id} className="submissionItem">
+                      <div>
+                        <strong>
+                          {attempt.passedCount}/{attempt.totalCount} checks
+                        </strong>
+                        <span>{new Date(attempt.submittedAt).toLocaleString()}</span>
+                      </div>
+                      <small className={`submissionStatus ${attempt.status}`}>
+                        {attempt.status}
+                      </small>
+                      <button onClick={() => restoreSubmission(attempt)}>
+                        Restore
+                      </button>
+                    </article>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
