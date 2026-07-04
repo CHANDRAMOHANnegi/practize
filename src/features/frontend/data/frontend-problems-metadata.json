@@ -1,0 +1,2007 @@
+[
+  {
+    "index": 1,
+    "slug": "tag-input-component",
+    "title": "Tag Input Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Meta",
+      "Atlassian",
+      "Flipkart",
+      "Swiggy"
+    ],
+    "tags": [
+      "React",
+      "State Management",
+      "Events"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 2,
+    "slug": "star-rating-component",
+    "title": "Star Rating Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Uber",
+      "Booking.com",
+      "Zomato",
+      "Swiggy"
+    ],
+    "tags": [
+      "React",
+      "Events",
+      "State"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 3,
+    "slug": "accordion-component",
+    "title": "Accordion Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Microsoft",
+      "Salesforce",
+      "Razorpay",
+      "PhonePe",
+      "Paytm"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Animation"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 4,
+    "slug": "countdown-timer",
+    "title": "Countdown Timer",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Apple",
+      "Netflix",
+      "Groww",
+      "Upstox"
+    ],
+    "tags": [
+      "React",
+      "useEffect",
+      "Intervals"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 5,
+    "slug": "modal-dialog",
+    "title": "Modal Dialog Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Adobe",
+      "Figma",
+      "Canva",
+      "Myntra",
+      "Meesho"
+    ],
+    "tags": [
+      "React",
+      "Portal",
+      "Events"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 6,
+    "slug": "progress-bar-component",
+    "title": "Animated Progress Bar",
+    "difficulty": "Easy",
+    "companies": [
+      "Spotify",
+      "LinkedIn",
+      "Dropbox",
+      "CRED",
+      "Dream11"
+    ],
+    "tags": [
+      "React",
+      "CSS",
+      "Animation"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 7,
+    "slug": "todo-list-app",
+    "title": "Todo List Application",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Microsoft",
+      "Amazon",
+      "Flipkart",
+      "Zepto"
+    ],
+    "tags": [
+      "React",
+      "CRUD",
+      "LocalStorage"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 8,
+    "slug": "infinite-scroll-list",
+    "title": "Infinite Scroll List",
+    "difficulty": "Hard",
+    "companies": [
+      "Meta",
+      "Twitter",
+      "LinkedIn",
+      "Pinterest",
+      "Instagram"
+    ],
+    "tags": [
+      "React",
+      "useEffect",
+      "Performance",
+      "API"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 9,
+    "slug": "image-carousel",
+    "title": "Image Carousel/Slider",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Flipkart",
+      "Myntra",
+      "Netflix",
+      "Airbnb"
+    ],
+    "tags": [
+      "React",
+      "CSS",
+      "Animation",
+      "Events"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 10,
+    "slug": "debounced-search",
+    "title": "Debounced Search Input",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Amazon",
+      "Uber",
+      "Ola",
+      "Swiggy"
+    ],
+    "tags": [
+      "React",
+      "Debouncing",
+      "API",
+      "Performance"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 11,
+    "slug": "pagination-component",
+    "title": "Data Table with Pagination",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Microsoft",
+      "Stripe",
+      "Razorpay",
+      "ServiceNow"
+    ],
+    "tags": [
+      "React",
+      "Pagination",
+      "API",
+      "State"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 12,
+    "slug": "form-validation",
+    "title": "Form with Validation",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Microsoft",
+      "Salesforce",
+      "Zoho",
+      "Freshworks"
+    ],
+    "tags": [
+      "React",
+      "Forms",
+      "Validation",
+      "Regex"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 13,
+    "slug": "traffic-light-simulation",
+    "title": "Traffic Light Simulation",
+    "difficulty": "Medium",
+    "companies": [
+      "Uber",
+      "Ola",
+      "Google",
+      "Citrix",
+      "VMware"
+    ],
+    "tags": [
+      "React",
+      "useEffect",
+      "Timers",
+      "State"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 14,
+    "slug": "tabs-component",
+    "title": "Tabs Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Microsoft",
+      "Adobe",
+      "Atlassian",
+      "Notion",
+      "Slack"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "CSS"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 15,
+    "slug": "counter-with-history",
+    "title": "Counter with Undo/Redo",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Figma",
+      "Notion",
+      "Linear",
+      "Canva"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Undo/Redo"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 16,
+    "slug": "nested-comments",
+    "title": "Nested Comments System",
+    "difficulty": "Hard",
+    "companies": [
+      "Reddit",
+      "HackerNews",
+      "Meta",
+      "Twitter",
+      "Discord"
+    ],
+    "tags": [
+      "React",
+      "Recursion",
+      "State"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 17,
+    "slug": "typeahead-autocomplete",
+    "title": "Typeahead Autocomplete",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Amazon",
+      "Algolia",
+      "Elastic",
+      "Flipkart"
+    ],
+    "tags": [
+      "React",
+      "API",
+      "Debounce",
+      "Keyboard"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 18,
+    "slug": "drag-drop-list",
+    "title": "Drag and Drop Reorderable List",
+    "difficulty": "Hard",
+    "companies": [
+      "Trello",
+      "Notion",
+      "Asana",
+      "Monday",
+      "Jira"
+    ],
+    "tags": [
+      "React",
+      "Drag-Drop",
+      "Events"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 19,
+    "slug": "multi-step-form",
+    "title": "Multi-Step Form Wizard",
+    "difficulty": "Hard",
+    "companies": [
+      "Stripe",
+      "Razorpay",
+      "PayPal",
+      "Freshworks",
+      "Chargebee"
+    ],
+    "tags": [
+      "React",
+      "Forms",
+      "State",
+      "Validation"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 20,
+    "slug": "file-explorer-tree",
+    "title": "File Explorer Tree",
+    "difficulty": "Hard",
+    "companies": [
+      "Microsoft",
+      "Google",
+      "Dropbox",
+      "GitHub",
+      "VS Code"
+    ],
+    "tags": [
+      "React",
+      "Recursion",
+      "Tree",
+      "State"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 21,
+    "slug": "stopwatch-with-laps",
+    "title": "Stopwatch with Laps",
+    "difficulty": "Medium",
+    "companies": [
+      "Apple",
+      "Fitbit",
+      "Nike",
+      "Strava",
+      "Garmin"
+    ],
+    "tags": [
+      "React",
+      "useEffect",
+      "Timers",
+      "State"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 22,
+    "slug": "memory-card-game",
+    "title": "Memory Card Matching Game",
+    "difficulty": "Hard",
+    "companies": [
+      "Zynga",
+      "King",
+      "EA",
+      "Playrix",
+      "Supercell"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Logic",
+      "Animation"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 23,
+    "slug": "toast-notifications",
+    "title": "Toast Notification System",
+    "difficulty": "Medium",
+    "companies": [
+      "Slack",
+      "Discord",
+      "Notion",
+      "Linear",
+      "Intercom"
+    ],
+    "tags": [
+      "React",
+      "Animation",
+      "State",
+      "Portal"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 24,
+    "slug": "otp-input-field",
+    "title": "OTP Input Field",
+    "difficulty": "Medium",
+    "companies": [
+      "Paytm",
+      "PhonePe",
+      "Google",
+      "WhatsApp",
+      "Razorpay"
+    ],
+    "tags": [
+      "React",
+      "Refs",
+      "Events",
+      "Focus"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 25,
+    "slug": "shopping-cart",
+    "title": "Shopping Cart Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Flipkart",
+      "Myntra",
+      "Walmart",
+      "eBay"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "LocalStorage",
+      "E-commerce"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 26,
+    "slug": "tooltip-component",
+    "title": "Tooltip Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Atlassian",
+      "Figma",
+      "Canva",
+      "Adobe",
+      "Salesforce"
+    ],
+    "tags": [
+      "React",
+      "CSS",
+      "Positioning",
+      "Events"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 27,
+    "slug": "emoji-picker",
+    "title": "Emoji Picker Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Slack",
+      "Discord",
+      "WhatsApp",
+      "Telegram",
+      "Twitter"
+    ],
+    "tags": [
+      "React",
+      "Search",
+      "Events",
+      "Categories"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 28,
+    "slug": "theme-toggle",
+    "title": "Light/Dark Theme Toggle",
+    "difficulty": "Easy",
+    "companies": [
+      "Apple",
+      "Google",
+      "GitHub",
+      "Notion",
+      "Vercel"
+    ],
+    "tags": [
+      "React",
+      "CSS Variables",
+      "LocalStorage",
+      "Context"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 29,
+    "slug": "color-picker",
+    "title": "Color Picker Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Figma",
+      "Canva",
+      "Adobe",
+      "Sketch",
+      "Framer"
+    ],
+    "tags": [
+      "React",
+      "Events",
+      "CSS",
+      "Input"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 30,
+    "slug": "password-strength-meter",
+    "title": "Password Strength Meter",
+    "difficulty": "Medium",
+    "companies": [
+      "Auth0",
+      "Okta",
+      "LastPass",
+      "Google",
+      "1Password"
+    ],
+    "tags": [
+      "React",
+      "Regex",
+      "Validation",
+      "Security"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 31,
+    "slug": "copy-to-clipboard",
+    "title": "Copy to Clipboard Component",
+    "difficulty": "Easy",
+    "companies": [
+      "GitHub",
+      "GitLab",
+      "Stripe",
+      "Vercel",
+      "Netlify"
+    ],
+    "tags": [
+      "React",
+      "Clipboard API",
+      "Feedback",
+      "UX"
+    ],
+    "estimatedMinutes": 15
+  },
+  {
+    "index": 32,
+    "slug": "loading-skeleton",
+    "title": "Loading Skeleton Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Facebook",
+      "LinkedIn",
+      "Medium",
+      "YouTube",
+      "Twitter"
+    ],
+    "tags": [
+      "React",
+      "CSS Animation",
+      "UX",
+      "Loading"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 33,
+    "slug": "breadcrumbs-navigation",
+    "title": "Breadcrumbs Navigation",
+    "difficulty": "Easy",
+    "companies": [
+      "Amazon",
+      "Shopify",
+      "eBay",
+      "Airbnb",
+      "Booking.com"
+    ],
+    "tags": [
+      "React",
+      "Navigation",
+      "Accessibility",
+      "UX"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 34,
+    "slug": "transfer-list",
+    "title": "Transfer List Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Salesforce",
+      "SAP",
+      "Oracle",
+      "Workday",
+      "ServiceNow"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Dual Lists",
+      "Selection"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 35,
+    "slug": "sortable-table",
+    "title": "Sortable Data Table",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Stripe",
+      "Salesforce",
+      "Airtable",
+      "Notion"
+    ],
+    "tags": [
+      "React",
+      "Sorting",
+      "Tables",
+      "Data"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 36,
+    "slug": "image-lightbox",
+    "title": "Image Lightbox Gallery",
+    "difficulty": "Medium",
+    "companies": [
+      "Unsplash",
+      "Pinterest",
+      "Flickr",
+      "Instagram",
+      "Google Photos"
+    ],
+    "tags": [
+      "React",
+      "Modal",
+      "Gallery",
+      "Keyboard"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 37,
+    "slug": "slider-range-input",
+    "title": "Slider/Range Input Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Airbnb",
+      "Zillow",
+      "Expedia",
+      "Spotify",
+      "Netflix"
+    ],
+    "tags": [
+      "React",
+      "Input",
+      "CSS",
+      "Events"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 38,
+    "slug": "poll-widget",
+    "title": "Poll/Voting Widget",
+    "difficulty": "Medium",
+    "companies": [
+      "Twitter",
+      "LinkedIn",
+      "Slack",
+      "Discord",
+      "Reddit"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Percentage",
+      "Animation"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 39,
+    "slug": "notification-badge",
+    "title": "Notification Badge Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Facebook",
+      "Instagram",
+      "WhatsApp",
+      "Slack",
+      "Teams"
+    ],
+    "tags": [
+      "React",
+      "CSS",
+      "State",
+      "Animation"
+    ],
+    "estimatedMinutes": 15
+  },
+  {
+    "index": 40,
+    "slug": "avatar-group",
+    "title": "Avatar Group Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Slack",
+      "Atlassian",
+      "Figma",
+      "Notion",
+      "Linear"
+    ],
+    "tags": [
+      "React",
+      "CSS",
+      "Layout",
+      "Overlap"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 41,
+    "slug": "stepper-component",
+    "title": "Stepper/Wizard Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Stripe",
+      "Shopify",
+      "Razorpay",
+      "PayPal",
+      "Square"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Progress",
+      "Navigation"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 42,
+    "slug": "read-more-less",
+    "title": "Read More/Less Component",
+    "difficulty": "Easy",
+    "companies": [
+      "Medium",
+      "Substack",
+      "Twitter",
+      "LinkedIn",
+      "Reddit"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Text",
+      "Toggle"
+    ],
+    "estimatedMinutes": 15
+  },
+  {
+    "index": 43,
+    "slug": "currency-converter",
+    "title": "Currency Converter",
+    "difficulty": "Medium",
+    "companies": [
+      "Wise",
+      "PayPal",
+      "Revolut",
+      "Stripe",
+      "Western Union"
+    ],
+    "tags": [
+      "React",
+      "API",
+      "Select",
+      "Calculation"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 44,
+    "slug": "kanban-board",
+    "title": "Kanban Board",
+    "difficulty": "Hard",
+    "companies": [
+      "Trello",
+      "Jira",
+      "Asana",
+      "Monday",
+      "Notion"
+    ],
+    "tags": [
+      "React",
+      "Drag-Drop",
+      "State",
+      "Columns"
+    ],
+    "estimatedMinutes": 50
+  },
+  {
+    "index": 45,
+    "slug": "calculator-app",
+    "title": "Calculator Application",
+    "difficulty": "Medium",
+    "companies": [
+      "Apple",
+      "Google",
+      "Microsoft",
+      "Samsung",
+      "Casio"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Logic",
+      "Events"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 46,
+    "slug": "digital-clock",
+    "title": "Digital Clock with Timezone",
+    "difficulty": "Easy",
+    "companies": [
+      "Apple",
+      "Google",
+      "Samsung",
+      "Fitbit",
+      "Garmin"
+    ],
+    "tags": [
+      "React",
+      "useEffect",
+      "Timer",
+      "Date"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 47,
+    "slug": "tic-tac-toe",
+    "title": "Tic Tac Toe Game",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Meta",
+      "Amazon",
+      "Microsoft",
+      "Apple"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Game Logic",
+      "Grid"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 48,
+    "slug": "word-counter",
+    "title": "Word Counter Tool",
+    "difficulty": "Easy",
+    "companies": [
+      "Grammarly",
+      "Hemingway",
+      "Medium",
+      "Google Docs",
+      "Notion"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "String",
+      "Regex"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 49,
+    "slug": "collapsible-sidebar",
+    "title": "Collapsible Sidebar Navigation",
+    "difficulty": "Medium",
+    "companies": [
+      "Slack",
+      "Discord",
+      "Notion",
+      "Linear",
+      "Figma"
+    ],
+    "tags": [
+      "React",
+      "Layout",
+      "Animation",
+      "Navigation"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 50,
+    "slug": "searchable-dropdown",
+    "title": "Searchable Dropdown Select",
+    "difficulty": "Medium",
+    "companies": [
+      "Airbnb",
+      "Booking",
+      "Uber",
+      "Lyft",
+      "DoorDash"
+    ],
+    "tags": [
+      "React",
+      "Search",
+      "Filter",
+      "Dropdown"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 51,
+    "slug": "like-button",
+    "title": "Animated Like Button",
+    "difficulty": "Easy",
+    "companies": [
+      "Instagram",
+      "Twitter",
+      "Facebook",
+      "TikTok",
+      "YouTube"
+    ],
+    "tags": [
+      "React",
+      "Animation",
+      "State",
+      "CSS"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 52,
+    "slug": "expense-tracker",
+    "title": "Expense Tracker App",
+    "difficulty": "Hard",
+    "companies": [
+      "Intuit",
+      "Mint",
+      "Expensify",
+      "Wave",
+      "Splitwise"
+    ],
+    "tags": [
+      "React",
+      "CRUD",
+      "localStorage",
+      "State"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 53,
+    "slug": "filterable-product-grid",
+    "title": "Filterable Product Grid",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Flipkart",
+      "Etsy",
+      "eBay",
+      "Walmart"
+    ],
+    "tags": [
+      "React",
+      "Filter",
+      "Grid",
+      "Search"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 54,
+    "slug": "faq-accordion",
+    "title": "FAQ Accordion",
+    "difficulty": "Easy",
+    "companies": [
+      "Zendesk",
+      "Intercom",
+      "Freshdesk",
+      "Help Scout",
+      "Stripe"
+    ],
+    "tags": [
+      "React",
+      "Toggle",
+      "Animation",
+      "List"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 55,
+    "slug": "typing-speed-test",
+    "title": "Typing Speed Test",
+    "difficulty": "Hard",
+    "companies": [
+      "Grammarly",
+      "TypeRacer",
+      "Monkeytype",
+      "Keybr",
+      "10FastFingers"
+    ],
+    "tags": [
+      "React",
+      "Timer",
+      "Input",
+      "WPM"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 56,
+    "slug": "quiz-app",
+    "title": "Multiple Choice Quiz",
+    "difficulty": "Medium",
+    "companies": [
+      "Duolingo",
+      "Kahoot",
+      "Quizlet",
+      "Coursera",
+      "Udemy"
+    ],
+    "tags": [
+      "React",
+      "State",
+      "Score",
+      "Navigation"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 57,
+    "slug": "bookmark-manager",
+    "title": "Bookmark Manager",
+    "difficulty": "Medium",
+    "companies": [
+      "Pocket",
+      "Raindrop",
+      "Pinboard",
+      "Chrome",
+      "Firefox"
+    ],
+    "tags": [
+      "React",
+      "CRUD",
+      "localStorage",
+      "Form"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 58,
+    "slug": "temperature-converter",
+    "title": "Temperature Converter",
+    "difficulty": "Easy",
+    "companies": [
+      "Weather.com",
+      "AccuWeather",
+      "Google",
+      "Apple",
+      "Samsung"
+    ],
+    "tags": [
+      "React",
+      "Input",
+      "Calculation",
+      "Form"
+    ],
+    "estimatedMinutes": 15
+  },
+  {
+    "index": 59,
+    "slug": "random-quote-generator",
+    "title": "Random Quote Generator",
+    "difficulty": "Easy",
+    "companies": [
+      "Twitter",
+      "Pinterest",
+      "Tumblr",
+      "Medium",
+      "Goodreads"
+    ],
+    "tags": [
+      "React",
+      "Random",
+      "Share",
+      "Animation"
+    ],
+    "estimatedMinutes": 20
+  },
+  {
+    "index": 60,
+    "slug": "pomodoro-timer",
+    "title": "Pomodoro Timer",
+    "difficulty": "Medium",
+    "companies": [
+      "Todoist",
+      "Notion",
+      "Trello",
+      "Asana",
+      "ClickUp"
+    ],
+    "tags": [
+      "React",
+      "Timer",
+      "State",
+      "useEffect"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 61,
+    "slug": "grid-light-box",
+    "title": "Grid Light Box",
+    "difficulty": "Medium",
+    "companies": [
+      "Uber",
+      "Microsoft",
+      "Google",
+      "Meta",
+      "Apple"
+    ],
+    "tags": [
+      "React",
+      "Grid",
+      "State",
+      "Sequence"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 62,
+    "slug": "stacked-snackbar",
+    "title": "Stacked Snackbar Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Razorpay",
+      "Stripe",
+      "PayPal",
+      "Square",
+      "Adyen"
+    ],
+    "tags": [
+      "React",
+      "Queue",
+      "Animation",
+      "Auto-dismiss"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 63,
+    "slug": "snake-game",
+    "title": "Snake Game",
+    "difficulty": "Hard",
+    "companies": [
+      "CRED",
+      "Google",
+      "Meta",
+      "Amazon",
+      "Microsoft"
+    ],
+    "tags": [
+      "React",
+      "Game",
+      "Keyboard",
+      "useEffect"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 64,
+    "slug": "email-client",
+    "title": "Email Client Interface",
+    "difficulty": "Hard",
+    "companies": [
+      "Microsoft",
+      "Google",
+      "Yahoo",
+      "Zoho",
+      "ProtonMail"
+    ],
+    "tags": [
+      "React",
+      "Layout",
+      "List",
+      "Detail View"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 65,
+    "slug": "lru-cache-visualizer",
+    "title": "LRU Cache Visualizer",
+    "difficulty": "Hard",
+    "companies": [
+      "Flipkart",
+      "Amazon",
+      "Google",
+      "Meta",
+      "Netflix"
+    ],
+    "tags": [
+      "React",
+      "Data Structure",
+      "State",
+      "Animation"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 66,
+    "slug": "two-way-data-binding",
+    "title": "Two-Way Data Binding",
+    "difficulty": "Medium",
+    "companies": [
+      "Microsoft",
+      "Google",
+      "Adobe",
+      "Atlassian",
+      "Salesforce"
+    ],
+    "tags": [
+      "React",
+      "Forms",
+      "State",
+      "Sync"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 67,
+    "slug": "file-upload-preview",
+    "title": "File Upload with Preview",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Google",
+      "Dropbox",
+      "Box",
+      "OneDrive"
+    ],
+    "tags": [
+      "React",
+      "File",
+      "Preview",
+      "Drag Drop"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 68,
+    "slug": "nested-checkboxes",
+    "title": "Nested Checkboxes",
+    "difficulty": "Hard",
+    "companies": [
+      "Google",
+      "Microsoft",
+      "Amazon",
+      "Meta",
+      "Apple"
+    ],
+    "tags": [
+      "React",
+      "Tree",
+      "Recursion",
+      "State"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 69,
+    "slug": "dynamic-form-fields",
+    "title": "Dynamic Form Fields",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Intuit",
+      "Salesforce",
+      "HubSpot",
+      "Zoho"
+    ],
+    "tags": [
+      "React",
+      "Forms",
+      "Dynamic",
+      "Array State"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 70,
+    "slug": "restaurant-listing",
+    "title": "Restaurant Listing App",
+    "difficulty": "Medium",
+    "companies": [
+      "Amazon",
+      "Zomato",
+      "Swiggy",
+      "UberEats",
+      "DoorDash"
+    ],
+    "tags": [
+      "React",
+      "Filter",
+      "Sort",
+      "Cards"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 71,
+    "slug": "undo-redo-feature",
+    "title": "Undo/Redo Feature",
+    "difficulty": "Medium",
+    "companies": [
+      "Google",
+      "Adobe",
+      "Figma",
+      "Canva",
+      "Microsoft"
+    ],
+    "tags": [
+      "React",
+      "History",
+      "Stack",
+      "State"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 72,
+    "slug": "use-debounce-hook",
+    "title": "Custom useDebounce Hook",
+    "difficulty": "Medium",
+    "companies": [
+      "Netflix",
+      "Amazon",
+      "Google",
+      "Meta",
+      "Airbnb"
+    ],
+    "tags": [
+      "React",
+      "Hooks",
+      "Debounce",
+      "Performance"
+    ],
+    "estimatedMinutes": 25
+  },
+  {
+    "index": 73,
+    "slug": "overlapping-circles",
+    "title": "Overlapping Circles",
+    "difficulty": "Hard",
+    "companies": [
+      "Uber",
+      "Google",
+      "Figma",
+      "Canva"
+    ],
+    "tags": [
+      "React",
+      "Geometry",
+      "DOM",
+      "Interactivity"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 74,
+    "slug": "feature-flag",
+    "title": "Feature Flag Component",
+    "difficulty": "Medium",
+    "companies": [
+      "Atlassian",
+      "LaunchDarkly",
+      "Optimizely",
+      "Netflix",
+      "Uber"
+    ],
+    "tags": [
+      "React",
+      "Context",
+      "Patterns",
+      "HOC"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 75,
+    "slug": "crypto-dashboard",
+    "title": "Crypto Live Dashboard",
+    "difficulty": "Hard",
+    "companies": [
+      "Coinbase",
+      "Robinhood",
+      "Binance",
+      "Kraken",
+      "Revolut"
+    ],
+    "tags": [
+      "React",
+      "WebSocket",
+      "Chart",
+      "Real-time"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 76,
+    "slug": "velocity-chart",
+    "title": "Interactive Velocity Chart",
+    "difficulty": "Medium",
+    "companies": [
+      "Atlassian",
+      "Tableau",
+      "Datadog",
+      "Salesforce"
+    ],
+    "tags": [
+      "React",
+      "CSS",
+      "Data Viz",
+      "Animation"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 77,
+    "slug": "multithreaded-comments",
+    "title": "Multi-Threaded Comments",
+    "difficulty": "Hard",
+    "companies": [
+      "Reddit",
+      "Meta",
+      "HackerRank",
+      "Quora",
+      "Twitch"
+    ],
+    "tags": [
+      "React",
+      "Recursion",
+      "Tree",
+      "State"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 78,
+    "slug": "virtual-list",
+    "title": "Virtual List (Windowing)",
+    "difficulty": "Hard",
+    "companies": [
+      "Meta",
+      "Twitter",
+      "Pinterest",
+      "Asana",
+      "Discord"
+    ],
+    "tags": [
+      "React",
+      "Performance",
+      "Scroll",
+      "Math"
+    ],
+    "estimatedMinutes": 60
+  },
+  {
+    "index": 79,
+    "slug": "payment-card-form",
+    "title": "Interactive Payment Card",
+    "difficulty": "Medium",
+    "companies": [
+      "Stripe",
+      "PayPal",
+      "Square",
+      "Visa",
+      "Mastercard"
+    ],
+    "tags": [
+      "React",
+      "Forms",
+      "Validation",
+      "Animation"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 80,
+    "slug": "date-range-picker",
+    "title": "Date Range Picker",
+    "difficulty": "Hard",
+    "companies": [
+      "Airbnb",
+      "Booking.com",
+      "Expedia",
+      "Google",
+      "Agoda"
+    ],
+    "tags": [
+      "React",
+      "Date",
+      "Calendar",
+      "Logic"
+    ],
+    "estimatedMinutes": 50
+  },
+  {
+    "index": 81,
+    "slug": "masonry-grid",
+    "title": "Masonry Grid Layout",
+    "difficulty": "Hard",
+    "companies": [
+      "Pinterest",
+      "Instagram",
+      "Unsplash",
+      "Dribbble"
+    ],
+    "tags": [
+      "React",
+      "Layout",
+      "CSS Grid",
+      "Math"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 82,
+    "slug": "ride-estimator",
+    "title": "Ride Price Estimator",
+    "difficulty": "Medium",
+    "companies": [
+      "Lyft",
+      "Uber",
+      "Grab",
+      "Bolt",
+      "Ola"
+    ],
+    "tags": [
+      "React",
+      "Forms",
+      "Math",
+      "Async"
+    ],
+    "estimatedMinutes": 30
+  },
+  {
+    "index": 83,
+    "slug": "interactive-shape",
+    "title": "Interactive Shape (C-Square)",
+    "difficulty": "Medium",
+    "companies": [
+      "Uber",
+      "Salesforce",
+      "Adobe",
+      "Microsoft"
+    ],
+    "tags": [
+      "React",
+      "Grid",
+      "Sequence",
+      "State"
+    ],
+    "estimatedMinutes": 35
+  },
+  {
+    "index": 84,
+    "slug": "slash-command-menu",
+    "title": "Slash Command Menu",
+    "difficulty": "Medium",
+    "companies": [
+      "Notion",
+      "Slack",
+      "Discord",
+      "Linear",
+      "ClickUp"
+    ],
+    "tags": [
+      "React",
+      "RegEx",
+      "DOM",
+      "Popup"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 85,
+    "slug": "pixel-art-maker",
+    "title": "Pixel Art Maker",
+    "difficulty": "Medium",
+    "companies": [
+      "Apple",
+      "Figma",
+      "Adobe",
+      "Canva"
+    ],
+    "tags": [
+      "React",
+      "Canvas",
+      "Events",
+      "Grid"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 86,
+    "slug": "interactive-timeline",
+    "title": "Interactive Timeline",
+    "difficulty": "Medium",
+    "companies": [
+      "Meta",
+      "Twitter",
+      "LinkedIn",
+      "History.com"
+    ],
+    "tags": [
+      "React",
+      "Layout",
+      "CSS",
+      "Data"
+    ],
+    "estimatedMinutes": 40
+  },
+  {
+    "index": 87,
+    "slug": "organization-chart",
+    "title": "Organization Chart",
+    "difficulty": "Hard",
+    "companies": [
+      "Microsoft",
+      "Salesforce",
+      "Workday",
+      "Oracle"
+    ],
+    "tags": [
+      "React",
+      "Tree",
+      "Recursion",
+      "CSS"
+    ],
+    "estimatedMinutes": 60
+  },
+  {
+    "index": 88,
+    "slug": "kanban-board-advanced",
+    "title": "Kanban Board (Advanced)",
+    "difficulty": "Hard",
+    "companies": [
+      "Atlassian",
+      "Trello",
+      "Linear",
+      "Asana",
+      "Notion"
+    ],
+    "tags": [
+      "React",
+      "DragDrop",
+      "Complex State",
+      "CRUD",
+      "Normalization"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 89,
+    "slug": "spreadsheet",
+    "title": "Mini Spreadsheet",
+    "difficulty": "Hard",
+    "companies": [
+      "Google",
+      "Microsoft",
+      "Airtable",
+      "Salesforce"
+    ],
+    "tags": [
+      "React",
+      "Grid",
+      "State",
+      "Formula"
+    ],
+    "estimatedMinutes": 60
+  },
+  {
+    "index": 90,
+    "slug": "audio-player",
+    "title": "Custom Audio Player",
+    "difficulty": "Medium",
+    "companies": [
+      "Spotify",
+      "Apple Music",
+      "SoundCloud",
+      "Tidal"
+    ],
+    "tags": [
+      "React",
+      "Audio",
+      "Events",
+      "Inputs"
+    ],
+    "estimatedMinutes": 45
+  },
+  {
+    "index": 91,
+    "slug": "rich-text-editor",
+    "title": "Rich Text Editor (WYSIWYG)",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Google",
+      "Notion",
+      "Medium",
+      "Microsoft"
+    ],
+    "tags": [
+      "React",
+      "ContentEditable",
+      "DOM",
+      "Selection"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 92,
+    "slug": "virtual-dom-impl",
+    "title": "Virtual DOM & Diffing",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Meta",
+      "Uber",
+      "Vercel"
+    ],
+    "tags": [
+      "Algorithms",
+      "DOM",
+      "Recursion",
+      "Performance"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 93,
+    "slug": "json-diff-viewer",
+    "title": "JSON Diff Viewer",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Uber",
+      "Amazon",
+      "Postman"
+    ],
+    "tags": [
+      "Recursion",
+      "Algorithms",
+      "Tree",
+      "UI"
+    ],
+    "estimatedMinutes": 75
+  },
+  {
+    "index": 94,
+    "slug": "sql-query-builder",
+    "title": "Visual SQL Query Builder",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Databricks",
+      "Snowflake",
+      "Palantir",
+      "Salesforce"
+    ],
+    "tags": [
+      "DragDrop",
+      "Logic",
+      "Parsers",
+      "State"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 95,
+    "slug": "code-processing-graph",
+    "title": "Data Processing DAG",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Palantir",
+      "Figma",
+      "Miro",
+      "Datadog"
+    ],
+    "tags": [
+      "SVG",
+      "Graph",
+      "DragDrop",
+      "Math"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 96,
+    "slug": "collaborative-whiteboard",
+    "title": "Interactive Whiteboard",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Miro",
+      "Figma",
+      "InVision",
+      "Lucidchart"
+    ],
+    "tags": [
+      "Canvas",
+      "Events",
+      "History",
+      "Geometry"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 97,
+    "slug": "virtualized-grid",
+    "title": "Virtualized Data Grid",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Meta",
+      "Stripe",
+      "Airtable",
+      "Google"
+    ],
+    "tags": [
+      "Performance",
+      "Scroll",
+      "Math",
+      "DOM"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 98,
+    "slug": "web-terminal",
+    "title": "Web Terminal / Shell",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Netflix",
+      "AWS",
+      "Google Cloud",
+      "DigitalOcean"
+    ],
+    "tags": [
+      "Parsing",
+      "History",
+      "State",
+      "Keyboard"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 99,
+    "slug": "calendar-scheduler",
+    "title": "Meeting Scheduler",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Google",
+      "Microsoft",
+      "Calendly",
+      "Zoom"
+    ],
+    "tags": [
+      "Algorithms",
+      "Layout",
+      "Date",
+      "CSS"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 100,
+    "slug": "syntax-highlighter",
+    "title": "Code Syntax Highlighter",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Microsoft",
+      "GitHub",
+      "GitLab",
+      "Replit"
+    ],
+    "tags": [
+      "Regex",
+      "Parsing",
+      "Performance",
+      "DOM"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 101,
+    "slug": "music-sequencer",
+    "title": "Music Sequencer / Grid",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Spotify",
+      "Apple",
+      "Ableton"
+    ],
+    "tags": [
+      "Audio",
+      "Grid",
+      "Timing",
+      "State"
+    ],
+    "estimatedMinutes": 90
+  },
+  {
+    "index": 102,
+    "slug": "transfer-list-advanced",
+    "title": "Multi-Select Transfer List",
+    "difficulty": "Super Hard",
+    "companies": [
+      "Linear",
+      "Microsoft",
+      "Salesforce"
+    ],
+    "tags": [
+      "Events",
+      "Keyboard",
+      "State",
+      "Performance"
+    ],
+    "estimatedMinutes": 60
+  }
+]
