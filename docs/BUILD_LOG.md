@@ -113,3 +113,27 @@ These files are for structure and metadata reference only. We will not copy full
   - `/frontend/tag-input-component` reports `3/5` checks passed for the intentionally incomplete starter.
   - `/frontend/star-rating-component` reports `2/4` checks passed for the intentionally incomplete starter.
   - `/frontend/accordion-component` reports `3/5` checks passed for the intentionally incomplete starter.
+
+### Workspace Runner V2
+
+- Added `@babel/standalone` as a local dependency.
+- Replaced CDN runtime scripts in the preview iframe with local same-origin assets:
+  - `/frontend-runner/react.js`
+  - `/frontend-runner/react-dom.js`
+  - `/frontend-runner/babel.js`
+- Added a Next route handler that serves the runtime scripts from installed packages.
+- Extracted preview HTML generation into `src/features/frontend/runner/create-preview-html.ts`.
+- Extracted preview message and test result types into `src/features/frontend/runner/types.ts`.
+- Added clearer runtime handling for:
+  - missing `App` component
+  - render/compile errors
+  - test-script errors
+- Verification:
+  - runtime assets return `200`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm run build`
+  - browser Run Code checks still report the expected starter results:
+    - Tag Input: `3/5`
+    - Star Rating: `2/4`
+    - Accordion: `3/5`
