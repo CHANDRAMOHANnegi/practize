@@ -11,7 +11,8 @@ We are building one module first:
 - ScaleMock-style dark workspace with problem, editor, live preview, and console panels
 - Monaco-powered `App.js` and `styles.css` editor tabs
 - Browser iframe runner for React starter code with `App.js` and `styles.css` tabs
-- First local test harness for the Tag Input problem
+- Real runnable content for the first three problems: Tag Input, Star Rating, and Accordion
+- Per-problem test scripts, constraints, starter files, and solution notes
 - Structured 102-problem metadata inventory with original generated summaries and requirements
 
 HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come later.
@@ -66,4 +67,12 @@ Current workspace engine route:
 
 ```txt
 http://localhost:3000/frontend/tag-input-component
+```
+
+First runnable problem set:
+
+```txt
+http://localhost:3000/frontend/tag-input-component
+http://localhost:3000/frontend/star-rating-component
+http://localhost:3000/frontend/accordion-component
 ```

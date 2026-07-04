@@ -94,3 +94,22 @@ These files are for structure and metadata reference only. We will not copy full
   - minimap disabled
   - Command/Ctrl+S runs checks
 - Verified Monaco renders in the browser and Run Code still reports the expected Tag Input starter result: `3/5` checks passed.
+
+### Frontend Problem Content V1
+
+- Added a dedicated problem override registry for high-quality runnable problems.
+- Expanded the frontend problem model with:
+  - `constraints`
+  - `solutionNotes`
+  - `testScript`
+- Extracted test scripts out of the workspace component so each problem owns its own checks.
+- Upgraded the first three problems with original starter code, CSS, requirements, constraints, solution notes, and runnable checks:
+  - Tag Input Component
+  - Star Rating Component
+  - Accordion Component
+- Updated the Solution tab to show problem-specific solution notes.
+- Kept the remaining catalog items backed by generated metadata and generic starter/test content for now.
+- Browser verification:
+  - `/frontend/tag-input-component` reports `3/5` checks passed for the intentionally incomplete starter.
+  - `/frontend/star-rating-component` reports `2/4` checks passed for the intentionally incomplete starter.
+  - `/frontend/accordion-component` reports `3/5` checks passed for the intentionally incomplete starter.
