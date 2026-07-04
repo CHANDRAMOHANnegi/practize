@@ -759,10 +759,13 @@ select {
   display: flex;
   align-items: center;
   padding: 0 28px;
+  border: 0;
   border-right: 1px solid #24262e;
   color: #657187;
   font-family: "SFMono-Regular", Consolas, monospace;
   font-weight: 800;
+  background: transparent;
+  cursor: pointer;
 }
 
 .fileTab.active {
@@ -857,6 +860,51 @@ select {
 .testPanel li {
   color: #59667c;
   line-height: 1.5;
+}
+
+.passText {
+  color: var(--green) !important;
+}
+
+.failText,
+.errorText {
+  color: var(--red) !important;
+}
+
+.testResults {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.testResults li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid #1d2027;
+}
+
+.testResults li.passed svg {
+  color: var(--green);
+}
+
+.testResults li.failed svg {
+  color: var(--red);
+}
+
+.testResults span {
+  color: #a8b2c4;
+}
+
+.testResults em {
+  display: block;
+  margin-top: 4px;
+  color: #6f7b91;
+  font-style: normal;
 }
 
 @media (max-width: 1120px) {

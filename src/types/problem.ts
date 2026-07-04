@@ -11,4 +11,5 @@ export type FrontendProblem = {
   summary: string;
   requirements: string[];
   starterCode: string;
+  starterCss: string;
 };

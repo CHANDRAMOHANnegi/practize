@@ -83,12 +83,87 @@ function App() {
 }`;
 }
 
+function starterCssFor(problem: MetadataProblem) {
+  if (problem.slug === "tag-input-component") {
+    return `.container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: #f6f7fb;
+}
+
+.tag-box {
+  width: min(420px, 100%);
+  min-height: 260px;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 22px;
+  border: 2px solid #dedee5;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(90deg, #6b6fe8, #8756bf);
+}
+
+.remove-btn {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+
+input {
+  min-width: 160px;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+}`;
+  }
+
+  return `.demo-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  padding: 32px;
+  background: #f6f7fb;
+  color: #1f2937;
+}
+
+button {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #f97316;
+  cursor: pointer;
+}`;
+}
+
 export const frontendProblems: FrontendProblem[] = (metadata as MetadataProblem[]).map(
   (problem) => ({
     ...problem,
     summary: toSummary(problem),
     requirements: toRequirements(problem),
     starterCode: starterCodeFor(problem),
+    starterCss: starterCssFor(problem),
   }),
 );
 

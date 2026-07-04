@@ -1,56 +1,224 @@
 "use client";
 
-import { Clock, Code2, History, Lightbulb, MessageCircle, Play, RotateCcw } from "lucide-react";
-import { useMemo, useState } from "react";
+import {
+  CheckCircle2,
+  Clock,
+  Code2,
+  History,
+  Lightbulb,
+  MessageCircle,
+  Play,
+  RotateCcw,
+  XCircle,
+} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import type { FrontendProblem } from "@/types/problem";
 
 type CodingWorkspaceProps = {
   problem: FrontendProblem;
 };
 
+type WorkspaceFile = "app" | "css";
+type RunStatus = "idle" | "running" | "passed" | "failed" | "error";
+type TestResult = {
+  name: string;
+  passed: boolean;
+  message?: string;
+};
+
+type PreviewMessage = {
+  source: "interview-studio-preview";
+  runId: number;
+  status: "passed" | "failed" | "error";
+  tests?: TestResult[];
+  error?: string;
+};
+
+function escapeInlineScript(value: string) {
+  return value.replaceAll("</script", "<\\/script");
+}
+
+function tagInputTestsScript() {
+  return `
+    const tests = [];
+    const record = (name, passed, message) => tests.push({ name, passed, message });
+    const root = document.querySelector('#root');
+    const renderedText = () => root ? root.textContent : '';
+    const input = document.querySelector('input[placeholder="Add a tag..."]');
+    record('Renders the tag input field', Boolean(input), 'Expected an input with placeholder "Add a tag...".');
+    record('Shows the initial Frontend tag', renderedText().includes('Frontend'), 'Expected the initial Frontend tag.');
+    record('Shows the initial React tag', renderedText().includes('React'), 'Expected the initial React tag.');
+
+    if (input) {
+      const valueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+      valueSetter.call(input, 'Vue');
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      await new Promise((resolve) => setTimeout(resolve, 80));
+      record('Adds a new tag when Enter is pressed', renderedText().includes('Vue'), 'Type a valid tag and add it on Enter.');
+    }
+
+    const removeButton = document.querySelector('.remove-btn');
+    if (removeButton) {
+      removeButton.click();
+      await new Promise((resolve) => setTimeout(resolve, 80));
+      record('Removes a tag when close is clicked', !renderedText().includes('Frontend'), 'The clicked tag should be removed from state.');
+    } else {
+      record('Removes a tag when close is clicked', false, 'Expected a .remove-btn button.');
+    }
+  `;
+}
+
+function genericTestsScript(problemTitle: string) {
+  return `
+    const tests = [];
+    const record = (name, passed, message) => tests.push({ name, passed, message });
+    record('Renders an application root', Boolean(document.querySelector('#root')?.children.length), 'Expected React to render content.');
+    record('Shows the problem title', document.querySelector('#root')?.textContent.includes(${JSON.stringify(problemTitle)}), 'Expected the component to display the problem title.');
+    record('Includes at least one interactive control', Boolean(document.querySelector('button, input, select, textarea')), 'Expected an interactive element.');
+  `;
+}
+
+function testsScriptFor(problem: FrontendProblem) {
+  return problem.slug === "tag-input-component"
+    ? tagInputTestsScript()
+    : genericTestsScript(problem.title);
+}
+
 export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
-  const [code, setCode] = useState(problem.starterCode);
-  const [status, setStatus] = useState<"idle" | "running" | "passed">("idle");
+  const [appCode, setAppCode] = useState(problem.starterCode);
+  const [cssCode, setCssCode] = useState(problem.starterCss);
+  const [activeFile, setActiveFile] = useState<WorkspaceFile>("app");
+  const [runId, setRunId] = useState(0);
+  const [status, setStatus] = useState<RunStatus>("idle");
+  const [testResults, setTestResults] = useState<TestResult[]>([]);
+  const [runtimeError, setRuntimeError] = useState("");
 
   const previewHtml = useMemo(
-    () => `
-      <html>
+    () => {
+      const runnerSource = `
+        ${appCode}
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+        async function runWorkspaceTests() {
+          ${testsScriptFor(problem)}
+
+          const passed = tests.every((test) => test.passed);
+          parent.postMessage({
+            source: 'interview-studio-preview',
+            runId: window.__RUN_ID__,
+            status: passed ? 'passed' : 'failed',
+            tests
+          }, '*');
+        }
+
+        if (window.__RUN_ID__ > 0) {
+          setTimeout(runWorkspaceTests, 120);
+        }
+      `;
+
+      return `
+      <!doctype html>
+      <html lang="en">
         <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <style>
-            body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f5f5f5; color: #252525; }
-            main { min-height: 100vh; display: grid; place-items: center; padding: 28px; }
-            .phone { width: 310px; min-height: 430px; border: 2px solid #dedede; border-radius: 10px; background: white; display: grid; place-items: center; padding: 22px; }
-            .tag { display: inline-flex; align-items: center; gap: 8px; margin: 6px; padding: 8px 12px; border-radius: 999px; background: linear-gradient(90deg, #6b6fe8, #8756bf); color: white; font-size: 15px; }
-            .x { width: 19px; height: 19px; border-radius: 999px; display: inline-grid; place-items: center; background: rgba(255,255,255,.25); }
-            .placeholder { margin-top: 120px; color: #777; font-size: 17px; }
+            body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f6f7fb; }
+            #root:empty::before {
+              content: "Preview loading...";
+              min-height: 100vh;
+              display: grid;
+              place-items: center;
+              color: #697386;
+            }
+            ${cssCode}
           </style>
         </head>
         <body>
-          <main>
-            <div class="phone">
-              <div>
-                <span class="tag">Frontend <span class="x">x</span></span>
-                <span class="tag">React <span class="x">x</span></span>
-                <div class="placeholder">Add a tag...</div>
-              </div>
-            </div>
-          </main>
+          <div id="root"></div>
+          <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+          <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+          <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+          <script>
+            window.__RUN_ID__ = ${runId};
+            window.onerror = function(message) {
+              parent.postMessage({
+                source: 'interview-studio-preview',
+                runId: window.__RUN_ID__,
+                status: 'error',
+                error: String(message)
+              }, '*');
+            };
+          </script>
+          <script>
+            try {
+              const workspaceSource = ${JSON.stringify(escapeInlineScript(runnerSource))};
+              const compiled = Babel.transform(workspaceSource, {
+                presets: [['react', { runtime: 'classic' }]]
+              }).code;
+              new Function(compiled)();
+            } catch (error) {
+              parent.postMessage({
+                source: 'interview-studio-preview',
+                runId: window.__RUN_ID__,
+                status: 'error',
+                error: error instanceof Error ? error.message : String(error)
+              }, '*');
+            }
+          </script>
         </body>
       </html>
-    `,
-    [problem],
+    `;
+    },
+    [appCode, cssCode, problem, runId],
   );
+
+  useEffect(() => {
+    function handlePreviewMessage(event: MessageEvent<PreviewMessage>) {
+      if (event.data?.source !== "interview-studio-preview") {
+        return;
+      }
+
+      if (event.data.runId !== runId) {
+        return;
+      }
+
+      setStatus(event.data.status);
+      setTestResults(event.data.tests ?? []);
+      setRuntimeError(event.data.error ?? "");
+    }
+
+    window.addEventListener("message", handlePreviewMessage);
+    return () => window.removeEventListener("message", handlePreviewMessage);
+  }, [runId]);
 
   function runEvaluation() {
     setStatus("running");
-    window.setTimeout(() => setStatus("passed"), 650);
+    setRuntimeError("");
+    setTestResults([]);
+    setRunId((currentRunId) => currentRunId + 1);
   }
+
+  function resetWorkspace() {
+    setAppCode(problem.starterCode);
+    setCssCode(problem.starterCss);
+    setActiveFile("app");
+    setStatus("idle");
+    setRuntimeError("");
+    setTestResults([]);
+  }
+
+  const activeCode = activeFile === "app" ? appCode : cssCode;
+  const passedCount = testResults.filter((test) => test.passed).length;
 
   return (
     <div className="workspaceShell">
       <header className="workspaceHeader">
         <div className="workspaceTitle">
-          <span className="backButton">‹</span>
+          <span className="backButton">&lt;</span>
           <div>
             <h1>{problem.title}</h1>
             <div>
@@ -66,7 +234,7 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
             <Code2 size={18} />
             Auto-Save Enabled
           </span>
-          <button className="workspaceIconButton">
+          <button className="workspaceIconButton" onClick={resetWorkspace}>
             <RotateCcw size={18} />
           </button>
           <button className="runCode" onClick={runEvaluation}>
@@ -132,10 +300,20 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
 
       <main className="editorPane">
         <header className="workspaceToolbar">
-          <div className="fileTab active">App.js</div>
-          <div className="fileTab">styles.css</div>
+          <button
+            className={`fileTab ${activeFile === "app" ? "active" : ""}`}
+            onClick={() => setActiveFile("app")}
+          >
+            App.js
+          </button>
+          <button
+            className={`fileTab ${activeFile === "css" ? "active" : ""}`}
+            onClick={() => setActiveFile("css")}
+          >
+            styles.css
+          </button>
           <div>
-            <button onClick={() => setCode(problem.starterCode)}>
+            <button onClick={resetWorkspace}>
               <RotateCcw size={16} />
               Reset
             </button>
@@ -148,8 +326,15 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
 
         <textarea
           className="codeEditor"
-          value={code}
-          onChange={(event) => setCode(event.target.value)}
+          value={activeCode}
+          onChange={(event) => {
+            if (activeFile === "app") {
+              setAppCode(event.target.value);
+            } else {
+              setCssCode(event.target.value);
+            }
+            setStatus("idle");
+          }}
           spellCheck={false}
         />
       </main>
@@ -164,12 +349,24 @@ export function CodingWorkspace({ problem }: CodingWorkspaceProps) {
           <strong>Terminal / Console</strong>
           {status === "idle" && <p>Run your solution to see local checks.</p>}
           {status === "running" && <p>Checking interactions and state updates...</p>}
-          {status === "passed" && (
-            <ul>
-              <li>Component renders without crashing.</li>
-              <li>Problem requirements are present.</li>
-              <li>Ready for real tests in the next iteration.</li>
-            </ul>
+          {status === "error" && <p className="errorText">{runtimeError}</p>}
+          {(status === "passed" || status === "failed") && (
+            <>
+              <p className={status === "passed" ? "passText" : "failText"}>
+                {passedCount}/{testResults.length} checks passed
+              </p>
+              <ul className="testResults">
+                {testResults.map((test) => (
+                  <li key={test.name} className={test.passed ? "passed" : "failed"}>
+                    {test.passed ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
+                    <span>
+                      {test.name}
+                      {!test.passed && test.message ? <em>{test.message}</em> : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </div>
       </aside>

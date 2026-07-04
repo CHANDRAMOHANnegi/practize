@@ -57,3 +57,25 @@ Reference files:
 - `outputs/scalemock-structure-inventory.json`
 
 These files are for structure and metadata reference only. We will not copy full proprietary statements, editorials, or starter code.
+
+### Frontend Module Expansion
+
+- Replaced the six-item seed list with a 102-item frontend metadata inventory.
+- Added listing pagination, company filtering, difficulty filtering, and search.
+- Restyled `/frontend` to a dark card grid with a ScaleMock-like top navigation and Practice dropdown.
+- Restyled `/frontend/[slug]` into a dark coding workspace with title bar, problem tabs, editor tabs, preview, and terminal panel.
+- Kept generated descriptions, requirements, and starter snippets original instead of copying reference-site content.
+
+### Workspace Engine V1
+
+- Split the frontend workspace into editable `App.js` and `styles.css` tabs.
+- Added starter CSS to the frontend problem model.
+- Replaced the static preview mock with an iframe runner that compiles React JSX in the browser.
+- Added parent/iframe messaging so Run Code can report pass/fail/error states into the terminal panel.
+- Added the first concrete Tag Input checks:
+  - renders the input
+  - shows initial tags
+  - adds a tag on Enter
+  - removes a tag by clicking close
+- Verified the starter Tag Input code reports `3/5` checks passed because the two TODO interactions are intentionally incomplete.
+- Note: the current iframe runner uses browser-loaded React/Babel scripts. This is good for MVP validation; later we should bundle the runtime or move evaluation into a more controlled sandbox.

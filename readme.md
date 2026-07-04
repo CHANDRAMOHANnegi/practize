@@ -8,8 +8,10 @@ We are building one module first:
 
 - Frontend machine-coding problem list
 - Frontend problem workspace
-- Monaco-style editor placeholder, live preview placeholder, and evaluation panel
-- Structured seed data that can grow into 100+ original problems
+- ScaleMock-style dark workspace with problem, editor, live preview, and console panels
+- Browser iframe runner for React starter code with `App.js` and `styles.css` tabs
+- First local test harness for the Tag Input problem
+- Structured 102-problem metadata inventory with original generated summaries and requirements
 
 HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come later.
 
@@ -18,6 +20,7 @@ HLD, LLD, DSA, mock interviews, auth, backend evaluation, and payments will come
 - Next.js App Router
 - TypeScript
 - CSS modules/global CSS for the first MVP
+- Preview runner: iframe + React/Babel browser runtime
 - Future additions: Monaco Editor, React Flow, Zustand, Prisma, Postgres, Auth.js
 
 ## Planned Routes
@@ -51,3 +54,14 @@ After dependencies are installed:
 npm run dev
 ```
 
+Open:
+
+```txt
+http://localhost:3000/frontend
+```
+
+Current workspace engine route:
+
+```txt
+http://localhost:3000/frontend/tag-input-component
+```

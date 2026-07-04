@@ -67,8 +67,7 @@ export function FrontendProblemBrowser({ problems }: FrontendProblemBrowserProps
           }}
           aria-label="Filter by difficulty"
         >
-          <option>Difficulty</option>
-          <option>All</option>
+          <option value="All">Difficulty</option>
           <option>Easy</option>
           <option>Medium</option>
           <option>Hard</option>
